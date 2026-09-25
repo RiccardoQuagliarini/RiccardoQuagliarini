@@ -24,10 +24,11 @@ def subset_sums(volts, max_slots):
     return sums
 
 
-def explore(F, B, S, batteries):
-    """batteries: dict floor -> volts. Returns (explored floor -> cannon combo, collected volts, sequence)."""
+def explore(F, B, S, batteries, extra=()):
+    """batteries: dict floor -> volts; extra: volts brought in from elsewhere.
+    Returns (explored floor -> cannon combo, collected volts, sequence)."""
     explored = {f: None for f in range(-B, 1)}
-    collected = [v for f, v in batteries.items() if f <= 0]
+    collected = [v for f, v in batteries.items() if f <= 0] + list(extra)
     sequence = [f"Walk ground + basement (floors {-B}..0), collect {sorted(collected) or 'nothing'}"]
 
     while True:
@@ -55,7 +56,17 @@ def missing_batteries(F, B, S, collected, floor, max_volt):
     return sorted({need - p for p in partial if 1 <= need - p <= max_volt})
 
 
-def evaluate(F, B, S, batteries, max_volt, min_unreachable, max_unreachable=None):
+def unlock_sets(F, B, S, batteries, max_volt, n):
+    """Sets of exactly n extra batteries that make every floor reachable, or None if fewer than n suffice."""
+    for k in range(1, n + 1):
+        found = [extra for extra in itertools.combinations_with_replacement(range(1, max_volt + 1), k)
+                 if len(explore(F, B, S, batteries, extra)[0]) == F + B + 1]
+        if found:
+            return found if k == n else None
+    return []
+
+
+def evaluate(F, B, S, batteries, max_volt, min_unreachable, max_unreachable=None, extra_needed=None):
     explored, collected, sequence = explore(F, B, S, batteries)
     if F not in explored:
         return None
@@ -64,7 +75,13 @@ def evaluate(F, B, S, batteries, max_volt, min_unreachable, max_unreachable=None
         return None
     if max_unreachable is not None and len(unreachable) > max_unreachable:
         return None
+    sets = None
+    if extra_needed is not None:
+        sets = unlock_sets(F, B, S, batteries, max_volt, extra_needed)
+        if not sets:
+            return None
     return {
+        "unlock_sets": sets,
         "F": F, "B": B, "S": S,
         "batteries": dict(sorted(batteries.items())),
         "combos": {f: c for f, c in explored.items() if c is not None},
@@ -128,6 +145,11 @@ def format_solution(sol):
     lines += ["  " + line for line in draw_tower(sol)]
     lines.append("  Sequence:")
     lines += [f"    {i}. {s}" for i, s in enumerate(sol["sequence"], 1)]
+    if sol["unlock_sets"]:
+        sets = sol["unlock_sets"]
+        shown = ", ".join("[" + " + ".join(f"{v}V" for v in s) + "]" for s in sets[:8])
+        more = f" ... ({len(sets)} options)" if len(sets) > 8 else ""
+        lines.append(f"  Unlock all floors with {len(sets[0])} extra batteries: {shown}{more}")
     return "\n".join(lines)
 
 
@@ -145,6 +167,10 @@ def main():
     p.add_argument("--max-volt", type=int, default=None, help="max battery voltage (default F+B)")
     p.add_argument("--min-unreachable", type=int, default=1, help="min number of unreachable floors")
     p.add_argument("--max-unreachable", type=int, default=None, help="max number of unreachable floors")
+    p.add_argument("--unreachable", type=int, default=None, metavar="X",
+                   help="exactly X unreachable floors (overrides min/max)")
+    p.add_argument("--extra", type=int, default=None, metavar="N",
+                   help="exactly N batteries from elsewhere are the minimum needed to unlock every floor")
     p.add_argument("--mode", choices=["exhaustive", "random"], default="exhaustive")
     p.add_argument("--samples", type=int, default=100000, help="samples per (F,B,S) in random mode")
     p.add_argument("--limit", type=int, default=5, help="solutions printed per (F,B,S); 0 = all")
@@ -153,6 +179,8 @@ def main():
 
     if args.F.start < 5 or args.B.start < 1 or args.S.start < 2:
         sys.exit("Constraints: F >= 5, B >= 1, S >= 2")
+    if args.unreachable is not None:
+        args.min_unreachable = args.max_unreachable = args.unreachable
 
     rng = random.Random(args.seed)
     for F, B, S in itertools.product(args.F, args.B, args.S):
@@ -168,7 +196,7 @@ def main():
             if key in seen:
                 continue
             seen.add(key)
-            sol = evaluate(F, B, S, batteries, max_volt, args.min_unreachable, args.max_unreachable)
+            sol = evaluate(F, B, S, batteries, max_volt, args.min_unreachable, args.max_unreachable, args.extra)
             if sol is None:
                 continue
             found += 1
