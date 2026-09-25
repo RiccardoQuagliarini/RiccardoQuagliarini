@@ -25,8 +25,8 @@ def subset_sums(volts, max_slots):
 
 
 def explore(F, B, S, batteries):
-    """batteries: dict floor -> volts. Returns (explored floors, collected volts, sequence)."""
-    explored = set(range(-B, 1))
+    """batteries: dict floor -> volts. Returns (explored floor -> cannon combo, collected volts, sequence)."""
+    explored = {f: None for f in range(-B, 1)}
     collected = [v for f, v in batteries.items() if f <= 0]
     sequence = [f"Walk ground + basement (floors {-B}..0), collect {sorted(collected) or 'nothing'}"]
 
@@ -39,7 +39,7 @@ def explore(F, B, S, batteries):
         with_battery = [f for f in new if f in batteries]
         target = min(with_battery) if with_battery else min(new)
         combo = new[target]
-        explored.add(target)
+        explored[target] = combo
         step = f"Cannon with {list(combo)} (={sum(combo)}V) -> floor {target}"
         if target in batteries:
             collected.append(batteries[target])
@@ -67,6 +67,7 @@ def evaluate(F, B, S, batteries, max_volt, min_unreachable, max_unreachable=None
     return {
         "F": F, "B": B, "S": S,
         "batteries": dict(sorted(batteries.items())),
+        "combos": {f: c for f, c in explored.items() if c is not None},
         "unreachable": {
             f: {"needs_sum": f + B, "missing_single_battery": missing_batteries(F, B, S, collected, f, max_volt)}
             for f in unreachable
@@ -96,14 +97,37 @@ def layouts_random(F, B, max_batteries, max_volt, samples, rng):
         yield {p: rng.randint(1, max_volt) for p in positions}
 
 
+def draw_tower(sol):
+    """ASCII tower: '|' walls = explored, '#' walls = unreachable, '=' walls = walkable by stairs."""
+    F, B = sol["F"], sol["B"]
+    width = 12
+    lines = [" " * 7 + "_" * (width + 2)]
+    for f in range(F, -B - 1, -1):
+        room = f"[{sol['batteries'][f]}V]" if f in sol["batteries"] else ""
+        if f == -B:
+            room = (room + " CANNON").strip()
+        if f in sol["unreachable"]:
+            info = sol["unreachable"][f]
+            wall = "#"
+            note = (f"LOCKED: needs {info['needs_sum']}V, add "
+                    + " or ".join(f"{v}V" for v in info["missing_single_battery"]))
+        elif f > 0:
+            combo = sol["combos"][f]
+            wall = "|"
+            note = f"cannon {' + '.join(f'{v}V' for v in combo)} = {sum(combo)}V"
+        else:
+            wall = "="
+            note = "ground floor (start), stairs down" if f == 0 else "basement, stairs"
+        lines.append(f"{f:>5}  {wall}{room.center(width)}{wall}   {note}")
+    lines.append(" " * 7 + "=" * (width + 2))
+    return lines
+
+
 def format_solution(sol):
     lines = [f"F={sol['F']} B={sol['B']} S={sol['S']}"]
-    lines += [f"  Floor {f:>3}: {v}V" for f, v in sol["batteries"].items()]
+    lines += ["  " + line for line in draw_tower(sol)]
     lines.append("  Sequence:")
     lines += [f"    {i}. {s}" for i, s in enumerate(sol["sequence"], 1)]
-    for f, info in sol["unreachable"].items():
-        lines.append(f"  Unreachable floor {f}: needs {info['needs_sum']}V total; "
-                     f"one extra battery of {info['missing_single_battery']}V would unlock it")
     return "\n".join(lines)
 
 
