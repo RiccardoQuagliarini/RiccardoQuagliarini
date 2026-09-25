@@ -1,0 +1,2255 @@
+Search: every layout with 1-3 batteries, plus 500,000 random layouts with exactly 4 batteries.
+Voltages 1..F+B. Columns: valid 3-battery layouts, fewest locked floors with <=3 batteries, fewest locked floors found with 4 batteries (sampled; '-' = none found).
+
+  F  B  S  valid(<=3)  min<=3  min4
+  5  1  2        1822       1     1
+  5  1  3        1833       1     1
+  5  1  4        1833       1     1
+  5  2  2        5050       1     1
+  5  2  3        5116       1     1
+  5  2  4        5116       1     1
+  5  3  2       11696       1     1
+  5  3  3       11984       1     1
+  5  3  4       11984       1     1
+  5  4  2       23540       1     1
+  5  4  3       24190       1     1
+  5  4  4       24190       1     1
+  5  5  2       43558       1     1
+  5  5  3       44884       1     1
+  5  5  4       44884       1     1
+  6  1  2        3375       1     1
+  6  1  3        3410       1     1
+  6  1  4        3410       1     1
+  6  2  2        8702       1     1
+  6  2  3        8876       1     1
+  6  2  4        8876       1     1
+  6  3  2       18614       1     1
+  6  3  3       19030       1     1
+  6  3  4       19030       1     1
+  6  4  2       35885       2     1
+  6  4  3       36795       2     1
+  6  4  4       36795       2     1
+  6  5  2       63647       2     1
+  6  5  3       65432       2     1
+  6  5  4       65432       2     1
+  7  1  2        5730       2     1
+  7  1  3        5825       1     1
+  7  1  4        5825       1     1
+  7  2  2       13741       1     1
+  7  2  3       13991       1     1
+  7  2  4       13991       1     1
+  7  3  2       28188       2     1
+  7  3  3       28772       2     1
+  7  3  4       28772       2     1
+  7  4  2       52085       2     1
+  7  4  3       53290       2     1
+  7  4  4       53290       2     1
+  7  5  2       89710       3     1
+  7  5  3       92025       3     1
+  7  5  4       92025       3     1
+  8  1  2        8981       2     1
+  8  1  3        9114       1     1
+  8  1  4        9114       1     1
+  8  2  2       20684       2     1
+  8  2  3       21032       2     1
+  8  2  4       21032       2     1
+  8  3  2       40766       2     1
+  8  3  3       41538       2     1
+  8  3  4       41538       2     1
+  8  4  2       73165       3     1
+  8  4  3       74730       3     1
+  8  4  4       74730       3     1
+  8  5  2      122387       3     1
+  8  5  3      125288       3     1
+  8  5  4      125288       3     1
+  9  1  2       13444       3     1
+  9  1  3       13625       3     1
+  9  1  4       13625       3     1
+  9  2  2       29818       3     1
+  9  2  3       30274       3     1
+  9  2  4       30274       3     1
+  9  3  2       57104       3     1
+  9  3  3       58104       3     1
+  9  3  4       58104       3     1
+  9  4  2       99630       3     1
+  9  4  3      101590       3     1
+  9  4  4      101590       3     1
+  9  5  2      163156       4     1
+  9  5  3      166741       4     1
+  9  5  4      166741       4     1
+ 10  1  2       19325       4     1
+ 10  1  3       19558       3     1
+ 10  1  4       19558       3     1
+ 10  2  2       41666       4     1
+ 10  2  3       42252       3     1
+ 10  2  4       42252       3     1
+ 10  3  2       77646       4     1
+ 10  3  3       78894       4     1
+ 10  3  4       78894       4     1
+ 10  4  2      132625       4     1
+ 10  4  3      135045       4     1
+ 10  4  4      135045       4     1
+ 10  5  2      212699       4     1
+ 10  5  3      217024       4     1
+ 10  5  4      217024       4     1
+
+F=5 B=1 S=2
+         ______________
+      5  |            |   cannon 1V + 5V = 6V
+      4  |            |   cannon 5V = 5V
+      3  #            #   LOCKED: needs 4V, add 2V or 3V or 4V
+      2  |            |   cannon 1V + 2V = 3V
+      1  |    [5V]    |   cannon 2V = 2V
+      0  =    [2V]    =   ground floor (start), stairs down
+     -1  =[1V] CANNON =   basement, stairs
+         ==============
+  Sequence:
+    1. Walk ground + basement (floors -1..0), collect [1, 2]
+    2. Cannon with [2] (=2V) -> floor 1, collect 5V, fall to -1
+    3. Cannon with [1, 2] (=3V) -> floor 2, fall to -1
+    4. Cannon with [5] (=5V) -> floor 4, fall to -1
+    5. Cannon with [1, 5] (=6V) -> floor 5, fall to -1
+
+F=5 B=1 S=3
+         ______________
+      5  |            |   cannon 1V + 1V + 4V = 6V
+      4  |            |   cannon 1V + 4V = 5V
+      3  |            |   cannon 4V = 4V
+      2  #            #   LOCKED: needs 3V, add 1V or 2V or 3V
+      1  |    [4V]    |   cannon 1V + 1V = 2V
+      0  =    [1V]    =   ground floor (start), stairs down
+     -1  =[1V] CANNON =   basement, stairs
+         ==============
+  Sequence:
+    1. Walk ground + basement (floors -1..0), collect [1, 1]
+    2. Cannon with [1, 1] (=2V) -> floor 1, collect 4V, fall to -1
+    3. Cannon with [4] (=4V) -> floor 3, fall to -1
+    4. Cannon with [1, 4] (=5V) -> floor 4, fall to -1
+    5. Cannon with [1, 1, 4] (=6V) -> floor 5, fall to -1
+
+F=5 B=1 S=4
+         ______________
+      5  |            |   cannon 1V + 1V + 4V = 6V
+      4  |            |   cannon 1V + 4V = 5V
+      3  |            |   cannon 4V = 4V
+      2  #            #   LOCKED: needs 3V, add 1V or 2V or 3V
+      1  |    [4V]    |   cannon 1V + 1V = 2V
+      0  =    [1V]    =   ground floor (start), stairs down
+     -1  =[1V] CANNON =   basement, stairs
+         ==============
+  Sequence:
+    1. Walk ground + basement (floors -1..0), collect [1, 1]
+    2. Cannon with [1, 1] (=2V) -> floor 1, collect 4V, fall to -1
+    3. Cannon with [4] (=4V) -> floor 3, fall to -1
+    4. Cannon with [1, 4] (=5V) -> floor 4, fall to -1
+    5. Cannon with [1, 1, 4] (=6V) -> floor 5, fall to -1
+
+F=5 B=2 S=2
+         ______________
+      5  |            |   cannon 2V + 5V = 7V
+      4  |            |   cannon 1V + 5V = 6V
+      3  |            |   cannon 5V = 5V
+      2  #            #   LOCKED: needs 4V, add 2V or 3V or 4V
+      1  |            |   cannon 1V + 2V = 3V
+      0  =    [5V]    =   ground floor (start), stairs down
+     -1  =    [2V]    =   basement, stairs
+     -2  =[1V] CANNON =   basement, stairs
+         ==============
+  Sequence:
+    1. Walk ground + basement (floors -2..0), collect [1, 2, 5]
+    2. Cannon with [1, 2] (=3V) -> floor 1, fall to -2
+    3. Cannon with [5] (=5V) -> floor 3, fall to -2
+    4. Cannon with [1, 5] (=6V) -> floor 4, fall to -2
+    5. Cannon with [2, 5] (=7V) -> floor 5, fall to -2
+
+F=5 B=2 S=3
+         ______________
+      5  |            |   cannon 2V + 5V = 7V
+      4  |            |   cannon 1V + 5V = 6V
+      3  |            |   cannon 5V = 5V
+      2  #            #   LOCKED: needs 4V, add 1V or 2V or 3V or 4V
+      1  |            |   cannon 1V + 2V = 3V
+      0  =    [5V]    =   ground floor (start), stairs down
+     -1  =    [2V]    =   basement, stairs
+     -2  =[1V] CANNON =   basement, stairs
+         ==============
+  Sequence:
+    1. Walk ground + basement (floors -2..0), collect [1, 2, 5]
+    2. Cannon with [1, 2] (=3V) -> floor 1, fall to -2
+    3. Cannon with [5] (=5V) -> floor 3, fall to -2
+    4. Cannon with [1, 5] (=6V) -> floor 4, fall to -2
+    5. Cannon with [2, 5] (=7V) -> floor 5, fall to -2
+
+F=5 B=2 S=4
+         ______________
+      5  |            |   cannon 2V + 5V = 7V
+      4  |            |   cannon 1V + 5V = 6V
+      3  |            |   cannon 5V = 5V
+      2  #            #   LOCKED: needs 4V, add 1V or 2V or 3V or 4V
+      1  |            |   cannon 1V + 2V = 3V
+      0  =    [5V]    =   ground floor (start), stairs down
+     -1  =    [2V]    =   basement, stairs
+     -2  =[1V] CANNON =   basement, stairs
+         ==============
+  Sequence:
+    1. Walk ground + basement (floors -2..0), collect [1, 2, 5]
+    2. Cannon with [1, 2] (=3V) -> floor 1, fall to -2
+    3. Cannon with [5] (=5V) -> floor 3, fall to -2
+    4. Cannon with [1, 5] (=6V) -> floor 4, fall to -2
+    5. Cannon with [2, 5] (=7V) -> floor 5, fall to -2
+
+F=5 B=3 S=2
+         ______________
+      5  |            |   cannon 3V + 5V = 8V
+      4  #            #   LOCKED: needs 7V, add 2V or 4V or 6V or 7V
+      3  |            |   cannon 1V + 5V = 6V
+      2  |            |   cannon 5V = 5V
+      1  |            |   cannon 1V + 3V = 4V
+      0  =            =   ground floor (start), stairs down
+     -1  =    [5V]    =   basement, stairs
+     -2  =    [3V]    =   basement, stairs
+     -3  =[1V] CANNON =   basement, stairs
+         ==============
+  Sequence:
+    1. Walk ground + basement (floors -3..0), collect [1, 3, 5]
+    2. Cannon with [1, 3] (=4V) -> floor 1, fall to -3
+    3. Cannon with [5] (=5V) -> floor 2, fall to -3
+    4. Cannon with [1, 5] (=6V) -> floor 3, fall to -3
+    5. Cannon with [3, 5] (=8V) -> floor 5, fall to -3
+
+F=5 B=3 S=3
+         ______________
+      5  |            |   cannon 1V + 2V + 5V = 8V
+      4  |            |   cannon 2V + 5V = 7V
+      3  |            |   cannon 1V + 5V = 6V
+      2  |            |   cannon 5V = 5V
+      1  #            #   LOCKED: needs 4V, add 1V or 2V or 3V or 4V
+      0  =            =   ground floor (start), stairs down
+     -1  =    [5V]    =   basement, stairs
+     -2  =    [2V]    =   basement, stairs
+     -3  =[1V] CANNON =   basement, stairs
+         ==============
+  Sequence:
+    1. Walk ground + basement (floors -3..0), collect [1, 2, 5]
+    2. Cannon with [5] (=5V) -> floor 2, fall to -3
+    3. Cannon with [1, 5] (=6V) -> floor 3, fall to -3
+    4. Cannon with [2, 5] (=7V) -> floor 4, fall to -3
+    5. Cannon with [1, 2, 5] (=8V) -> floor 5, fall to -3
+
+F=5 B=3 S=4
+         ______________
+      5  |            |   cannon 1V + 2V + 5V = 8V
+      4  |            |   cannon 2V + 5V = 7V
+      3  |            |   cannon 1V + 5V = 6V
+      2  |            |   cannon 5V = 5V
+      1  #            #   LOCKED: needs 4V, add 1V or 2V or 3V or 4V
+      0  =            =   ground floor (start), stairs down
+     -1  =    [5V]    =   basement, stairs
+     -2  =    [2V]    =   basement, stairs
+     -3  =[1V] CANNON =   basement, stairs
+         ==============
+  Sequence:
+    1. Walk ground + basement (floors -3..0), collect [1, 2, 5]
+    2. Cannon with [5] (=5V) -> floor 2, fall to -3
+    3. Cannon with [1, 5] (=6V) -> floor 3, fall to -3
+    4. Cannon with [2, 5] (=7V) -> floor 4, fall to -3
+    5. Cannon with [1, 2, 5] (=8V) -> floor 5, fall to -3
+
+F=5 B=4 S=2
+         ______________
+      5  |            |   cannon 1V + 8V = 9V
+      4  |            |   cannon 8V = 8V
+      3  #            #   LOCKED: needs 7V, add 2V or 6V or 7V
+      2  |            |   cannon 1V + 5V = 6V
+      1  |            |   cannon 5V = 5V
+      0  =            =   ground floor (start), stairs down
+     -1  =            =   basement, stairs
+     -2  =    [8V]    =   basement, stairs
+     -3  =    [5V]    =   basement, stairs
+     -4  =[1V] CANNON =   basement, stairs
+         ==============
+  Sequence:
+    1. Walk ground + basement (floors -4..0), collect [1, 5, 8]
+    2. Cannon with [5] (=5V) -> floor 1, fall to -4
+    3. Cannon with [1, 5] (=6V) -> floor 2, fall to -4
+    4. Cannon with [8] (=8V) -> floor 4, fall to -4
+    5. Cannon with [1, 8] (=9V) -> floor 5, fall to -4
+
+F=5 B=4 S=3
+         ______________
+      5  |            |   cannon 1V + 2V + 6V = 9V
+      4  |            |   cannon 2V + 6V = 8V
+      3  |            |   cannon 1V + 6V = 7V
+      2  |            |   cannon 6V = 6V
+      1  #            #   LOCKED: needs 5V, add 2V or 3V or 4V or 5V
+      0  =            =   ground floor (start), stairs down
+     -1  =            =   basement, stairs
+     -2  =    [6V]    =   basement, stairs
+     -3  =    [2V]    =   basement, stairs
+     -4  =[1V] CANNON =   basement, stairs
+         ==============
+  Sequence:
+    1. Walk ground + basement (floors -4..0), collect [1, 2, 6]
+    2. Cannon with [6] (=6V) -> floor 2, fall to -4
+    3. Cannon with [1, 6] (=7V) -> floor 3, fall to -4
+    4. Cannon with [2, 6] (=8V) -> floor 4, fall to -4
+    5. Cannon with [1, 2, 6] (=9V) -> floor 5, fall to -4
+
+F=5 B=4 S=4
+         ______________
+      5  |            |   cannon 1V + 2V + 6V = 9V
+      4  |            |   cannon 2V + 6V = 8V
+      3  |            |   cannon 1V + 6V = 7V
+      2  |            |   cannon 6V = 6V
+      1  #            #   LOCKED: needs 5V, add 2V or 3V or 4V or 5V
+      0  =            =   ground floor (start), stairs down
+     -1  =            =   basement, stairs
+     -2  =    [6V]    =   basement, stairs
+     -3  =    [2V]    =   basement, stairs
+     -4  =[1V] CANNON =   basement, stairs
+         ==============
+  Sequence:
+    1. Walk ground + basement (floors -4..0), collect [1, 2, 6]
+    2. Cannon with [6] (=6V) -> floor 2, fall to -4
+    3. Cannon with [1, 6] (=7V) -> floor 3, fall to -4
+    4. Cannon with [2, 6] (=8V) -> floor 4, fall to -4
+    5. Cannon with [1, 2, 6] (=9V) -> floor 5, fall to -4
+
+F=5 B=5 S=2
+         ______________
+      5  |            |   cannon 1V + 9V = 10V
+      4  |            |   cannon 9V = 9V
+      3  #            #   LOCKED: needs 8V, add 2V or 7V or 8V
+      2  |            |   cannon 1V + 6V = 7V
+      1  |            |   cannon 6V = 6V
+      0  =            =   ground floor (start), stairs down
+     -1  =            =   basement, stairs
+     -2  =            =   basement, stairs
+     -3  =    [9V]    =   basement, stairs
+     -4  =    [6V]    =   basement, stairs
+     -5  =[1V] CANNON =   basement, stairs
+         ==============
+  Sequence:
+    1. Walk ground + basement (floors -5..0), collect [1, 6, 9]
+    2. Cannon with [6] (=6V) -> floor 1, fall to -5
+    3. Cannon with [1, 6] (=7V) -> floor 2, fall to -5
+    4. Cannon with [9] (=9V) -> floor 4, fall to -5
+    5. Cannon with [1, 9] (=10V) -> floor 5, fall to -5
+
+F=5 B=5 S=3
+         ______________
+      5  |            |   cannon 1V + 2V + 7V = 10V
+      4  |            |   cannon 2V + 7V = 9V
+      3  |            |   cannon 1V + 7V = 8V
+      2  |            |   cannon 7V = 7V
+      1  #            #   LOCKED: needs 6V, add 3V or 4V or 5V or 6V
+      0  =            =   ground floor (start), stairs down
+     -1  =            =   basement, stairs
+     -2  =            =   basement, stairs
+     -3  =    [7V]    =   basement, stairs
+     -4  =    [2V]    =   basement, stairs
+     -5  =[1V] CANNON =   basement, stairs
+         ==============
+  Sequence:
+    1. Walk ground + basement (floors -5..0), collect [1, 2, 7]
+    2. Cannon with [7] (=7V) -> floor 2, fall to -5
+    3. Cannon with [1, 7] (=8V) -> floor 3, fall to -5
+    4. Cannon with [2, 7] (=9V) -> floor 4, fall to -5
+    5. Cannon with [1, 2, 7] (=10V) -> floor 5, fall to -5
+
+F=5 B=5 S=4
+         ______________
+      5  |            |   cannon 1V + 2V + 7V = 10V
+      4  |            |   cannon 2V + 7V = 9V
+      3  |            |   cannon 1V + 7V = 8V
+      2  |            |   cannon 7V = 7V
+      1  #            #   LOCKED: needs 6V, add 3V or 4V or 5V or 6V
+      0  =            =   ground floor (start), stairs down
+     -1  =            =   basement, stairs
+     -2  =            =   basement, stairs
+     -3  =    [7V]    =   basement, stairs
+     -4  =    [2V]    =   basement, stairs
+     -5  =[1V] CANNON =   basement, stairs
+         ==============
+  Sequence:
+    1. Walk ground + basement (floors -5..0), collect [1, 2, 7]
+    2. Cannon with [7] (=7V) -> floor 2, fall to -5
+    3. Cannon with [1, 7] (=8V) -> floor 3, fall to -5
+    4. Cannon with [2, 7] (=9V) -> floor 4, fall to -5
+    5. Cannon with [1, 2, 7] (=10V) -> floor 5, fall to -5
+
+F=6 B=1 S=2
+         ______________
+      6  |            |   cannon 2V + 5V = 7V
+      5  |            |   cannon 1V + 5V = 6V
+      4  |            |   cannon 5V = 5V
+      3  #            #   LOCKED: needs 4V, add 2V or 3V or 4V
+      2  |            |   cannon 1V + 2V = 3V
+      1  |    [5V]    |   cannon 2V = 2V
+      0  =    [2V]    =   ground floor (start), stairs down
+     -1  =[1V] CANNON =   basement, stairs
+         ==============
+  Sequence:
+    1. Walk ground + basement (floors -1..0), collect [1, 2]
+    2. Cannon with [2] (=2V) -> floor 1, collect 5V, fall to -1
+    3. Cannon with [1, 2] (=3V) -> floor 2, fall to -1
+    4. Cannon with [5] (=5V) -> floor 4, fall to -1
+    5. Cannon with [1, 5] (=6V) -> floor 5, fall to -1
+    6. Cannon with [2, 5] (=7V) -> floor 6, fall to -1
+
+F=6 B=1 S=3
+         ______________
+      6  |            |   cannon 2V + 5V = 7V
+      5  |            |   cannon 1V + 5V = 6V
+      4  |            |   cannon 5V = 5V
+      3  #            #   LOCKED: needs 4V, add 1V or 2V or 3V or 4V
+      2  |            |   cannon 1V + 2V = 3V
+      1  |    [5V]    |   cannon 2V = 2V
+      0  =    [2V]    =   ground floor (start), stairs down
+     -1  =[1V] CANNON =   basement, stairs
+         ==============
+  Sequence:
+    1. Walk ground + basement (floors -1..0), collect [1, 2]
+    2. Cannon with [2] (=2V) -> floor 1, collect 5V, fall to -1
+    3. Cannon with [1, 2] (=3V) -> floor 2, fall to -1
+    4. Cannon with [5] (=5V) -> floor 4, fall to -1
+    5. Cannon with [1, 5] (=6V) -> floor 5, fall to -1
+    6. Cannon with [2, 5] (=7V) -> floor 6, fall to -1
+
+F=6 B=1 S=4
+         ______________
+      6  |            |   cannon 2V + 5V = 7V
+      5  |            |   cannon 1V + 5V = 6V
+      4  |            |   cannon 5V = 5V
+      3  #            #   LOCKED: needs 4V, add 1V or 2V or 3V or 4V
+      2  |            |   cannon 1V + 2V = 3V
+      1  |    [5V]    |   cannon 2V = 2V
+      0  =    [2V]    =   ground floor (start), stairs down
+     -1  =[1V] CANNON =   basement, stairs
+         ==============
+  Sequence:
+    1. Walk ground + basement (floors -1..0), collect [1, 2]
+    2. Cannon with [2] (=2V) -> floor 1, collect 5V, fall to -1
+    3. Cannon with [1, 2] (=3V) -> floor 2, fall to -1
+    4. Cannon with [5] (=5V) -> floor 4, fall to -1
+    5. Cannon with [1, 5] (=6V) -> floor 5, fall to -1
+    6. Cannon with [2, 5] (=7V) -> floor 6, fall to -1
+
+F=6 B=2 S=2
+         ______________
+      6  |            |   cannon 3V + 5V = 8V
+      5  #            #   LOCKED: needs 7V, add 2V or 4V or 6V or 7V
+      4  |            |   cannon 1V + 5V = 6V
+      3  |            |   cannon 5V = 5V
+      2  |            |   cannon 1V + 3V = 4V
+      1  |            |   cannon 3V = 3V
+      0  =    [5V]    =   ground floor (start), stairs down
+     -1  =    [3V]    =   basement, stairs
+     -2  =[1V] CANNON =   basement, stairs
+         ==============
+  Sequence:
+    1. Walk ground + basement (floors -2..0), collect [1, 3, 5]
+    2. Cannon with [3] (=3V) -> floor 1, fall to -2
+    3. Cannon with [1, 3] (=4V) -> floor 2, fall to -2
+    4. Cannon with [5] (=5V) -> floor 3, fall to -2
+    5. Cannon with [1, 5] (=6V) -> floor 4, fall to -2
+    6. Cannon with [3, 5] (=8V) -> floor 6, fall to -2
+
+F=6 B=2 S=3
+         ______________
+      6  |            |   cannon 1V + 2V + 5V = 8V
+      5  |            |   cannon 2V + 5V = 7V
+      4  |            |   cannon 1V + 5V = 6V
+      3  |            |   cannon 5V = 5V
+      2  #            #   LOCKED: needs 4V, add 1V or 2V or 3V or 4V
+      1  |            |   cannon 1V + 2V = 3V
+      0  =    [5V]    =   ground floor (start), stairs down
+     -1  =    [2V]    =   basement, stairs
+     -2  =[1V] CANNON =   basement, stairs
+         ==============
+  Sequence:
+    1. Walk ground + basement (floors -2..0), collect [1, 2, 5]
+    2. Cannon with [1, 2] (=3V) -> floor 1, fall to -2
+    3. Cannon with [5] (=5V) -> floor 3, fall to -2
+    4. Cannon with [1, 5] (=6V) -> floor 4, fall to -2
+    5. Cannon with [2, 5] (=7V) -> floor 5, fall to -2
+    6. Cannon with [1, 2, 5] (=8V) -> floor 6, fall to -2
+
+F=6 B=2 S=4
+         ______________
+      6  |            |   cannon 1V + 2V + 5V = 8V
+      5  |            |   cannon 2V + 5V = 7V
+      4  |            |   cannon 1V + 5V = 6V
+      3  |            |   cannon 5V = 5V
+      2  #            #   LOCKED: needs 4V, add 1V or 2V or 3V or 4V
+      1  |            |   cannon 1V + 2V = 3V
+      0  =    [5V]    =   ground floor (start), stairs down
+     -1  =    [2V]    =   basement, stairs
+     -2  =[1V] CANNON =   basement, stairs
+         ==============
+  Sequence:
+    1. Walk ground + basement (floors -2..0), collect [1, 2, 5]
+    2. Cannon with [1, 2] (=3V) -> floor 1, fall to -2
+    3. Cannon with [5] (=5V) -> floor 3, fall to -2
+    4. Cannon with [1, 5] (=6V) -> floor 4, fall to -2
+    5. Cannon with [2, 5] (=7V) -> floor 5, fall to -2
+    6. Cannon with [1, 2, 5] (=8V) -> floor 6, fall to -2
+
+F=6 B=3 S=2
+         ______________
+      6  |            |   cannon 4V + 5V = 9V
+      5  #            #   LOCKED: needs 8V, add 3V or 4V or 6V or 8V
+      4  |            |   cannon 2V + 5V = 7V
+      3  |            |   cannon 2V + 4V = 6V
+      2  |            |   cannon 5V = 5V
+      1  |            |   cannon 4V = 4V
+      0  =            =   ground floor (start), stairs down
+     -1  =    [5V]    =   basement, stairs
+     -2  =    [4V]    =   basement, stairs
+     -3  =[2V] CANNON =   basement, stairs
+         ==============
+  Sequence:
+    1. Walk ground + basement (floors -3..0), collect [2, 4, 5]
+    2. Cannon with [4] (=4V) -> floor 1, fall to -3
+    3. Cannon with [5] (=5V) -> floor 2, fall to -3
+    4. Cannon with [2, 4] (=6V) -> floor 3, fall to -3
+    5. Cannon with [2, 5] (=7V) -> floor 4, fall to -3
+    6. Cannon with [4, 5] (=9V) -> floor 6, fall to -3
+
+F=6 B=3 S=3
+         ______________
+      6  |            |   cannon 1V + 3V + 5V = 9V
+      5  |            |   cannon 3V + 5V = 8V
+      4  #            #   LOCKED: needs 7V, add 1V or 2V or 3V or 4V or 6V or 7V
+      3  |            |   cannon 1V + 5V = 6V
+      2  |            |   cannon 5V = 5V
+      1  |            |   cannon 1V + 3V = 4V
+      0  =            =   ground floor (start), stairs down
+     -1  =    [5V]    =   basement, stairs
+     -2  =    [3V]    =   basement, stairs
+     -3  =[1V] CANNON =   basement, stairs
+         ==============
+  Sequence:
+    1. Walk ground + basement (floors -3..0), collect [1, 3, 5]
+    2. Cannon with [1, 3] (=4V) -> floor 1, fall to -3
+    3. Cannon with [5] (=5V) -> floor 2, fall to -3
+    4. Cannon with [1, 5] (=6V) -> floor 3, fall to -3
+    5. Cannon with [3, 5] (=8V) -> floor 5, fall to -3
+    6. Cannon with [1, 3, 5] (=9V) -> floor 6, fall to -3
+
+F=6 B=3 S=4
+         ______________
+      6  |            |   cannon 1V + 3V + 5V = 9V
+      5  |            |   cannon 3V + 5V = 8V
+      4  #            #   LOCKED: needs 7V, add 1V or 2V or 3V or 4V or 6V or 7V
+      3  |            |   cannon 1V + 5V = 6V
+      2  |            |   cannon 5V = 5V
+      1  |            |   cannon 1V + 3V = 4V
+      0  =            =   ground floor (start), stairs down
+     -1  =    [5V]    =   basement, stairs
+     -2  =    [3V]    =   basement, stairs
+     -3  =[1V] CANNON =   basement, stairs
+         ==============
+  Sequence:
+    1. Walk ground + basement (floors -3..0), collect [1, 3, 5]
+    2. Cannon with [1, 3] (=4V) -> floor 1, fall to -3
+    3. Cannon with [5] (=5V) -> floor 2, fall to -3
+    4. Cannon with [1, 5] (=6V) -> floor 3, fall to -3
+    5. Cannon with [3, 5] (=8V) -> floor 5, fall to -3
+    6. Cannon with [1, 3, 5] (=9V) -> floor 6, fall to -3
+
+F=6 B=4 S=2
+         ______________
+      6  |            |   cannon 4V + 6V = 10V
+      5  |            |   cannon 5V + 4V = 9V
+      4  #            #   LOCKED: needs 8V, add 1V or 2V or 3V or 4V or 8V
+      3  |    [6V]    |   cannon 7V = 7V
+      2  |            |   cannon 6V = 6V
+      1  |    [4V]    |   cannon 5V = 5V
+      0  =            =   ground floor (start), stairs down
+     -1  =    [7V]    =   basement, stairs
+     -2  =            =   basement, stairs
+     -3  =    [5V]    =   basement, stairs
+     -4  =   CANNON   =   basement, stairs
+         ==============
+  Sequence:
+    1. Walk ground + basement (floors -4..0), collect [5, 7]
+    2. Cannon with [5] (=5V) -> floor 1, collect 4V, fall to -4
+    3. Cannon with [7] (=7V) -> floor 3, collect 6V, fall to -4
+    4. Cannon with [6] (=6V) -> floor 2, fall to -4
+    5. Cannon with [5, 4] (=9V) -> floor 5, fall to -4
+    6. Cannon with [4, 6] (=10V) -> floor 6, fall to -4
+
+F=6 B=4 S=3
+         ______________
+      6  |            |   cannon 4V + 6V = 10V
+      5  |            |   cannon 5V + 4V = 9V
+      4  |            |   cannon 4V + 4V = 8V
+      3  #            #   LOCKED: needs 7V, add 1V or 2V or 3V or 7V
+      2  |            |   cannon 6V = 6V
+      1  |    [6V]    |   cannon 5V = 5V
+      0  =    [4V]    =   ground floor (start), stairs down
+     -1  =            =   basement, stairs
+     -2  =    [4V]    =   basement, stairs
+     -3  =    [5V]    =   basement, stairs
+     -4  =   CANNON   =   basement, stairs
+         ==============
+  Sequence:
+    1. Walk ground + basement (floors -4..0), collect [4, 4, 5]
+    2. Cannon with [5] (=5V) -> floor 1, collect 6V, fall to -4
+    3. Cannon with [6] (=6V) -> floor 2, fall to -4
+    4. Cannon with [4, 4] (=8V) -> floor 4, fall to -4
+    5. Cannon with [5, 4] (=9V) -> floor 5, fall to -4
+    6. Cannon with [4, 6] (=10V) -> floor 6, fall to -4
+
+F=6 B=4 S=4
+         ______________
+      6  |    [9V]    |   cannon 6V + 4V = 10V
+      5  |            |   cannon 9V = 9V
+      4  #            #   LOCKED: needs 8V, add 1V or 2V or 3V or 4V or 7V or 8V
+      3  |    [4V]    |   cannon 6V + 1V = 7V
+      2  |            |   cannon 6V = 6V
+      1  |            |   cannon 1V + 4V = 5V
+      0  =            =   ground floor (start), stairs down
+     -1  =    [6V]    =   basement, stairs
+     -2  =    [1V]    =   basement, stairs
+     -3  =            =   basement, stairs
+     -4  =   CANNON   =   basement, stairs
+         ==============
+  Sequence:
+    1. Walk ground + basement (floors -4..0), collect [1, 6]
+    2. Cannon with [6, 1] (=7V) -> floor 3, collect 4V, fall to -4
+    3. Cannon with [6, 4] (=10V) -> floor 6, collect 9V, fall to -4
+    4. Cannon with [1, 4] (=5V) -> floor 1, fall to -4
+    5. Cannon with [6] (=6V) -> floor 2, fall to -4
+    6. Cannon with [9] (=9V) -> floor 5, fall to -4
+
+F=6 B=5 S=2
+         ______________
+      6  |    [2V]    |   cannon 5V + 6V = 11V
+      5  |            |   cannon 8V + 2V = 10V
+      4  #            #   LOCKED: needs 9V, add 1V or 3V or 4V or 7V or 9V
+      3  |    [6V]    |   cannon 8V = 8V
+      2  |            |   cannon 5V + 2V = 7V
+      1  |            |   cannon 6V = 6V
+      0  =            =   ground floor (start), stairs down
+     -1  =    [5V]    =   basement, stairs
+     -2  =    [8V]    =   basement, stairs
+     -3  =            =   basement, stairs
+     -4  =            =   basement, stairs
+     -5  =   CANNON   =   basement, stairs
+         ==============
+  Sequence:
+    1. Walk ground + basement (floors -5..0), collect [5, 8]
+    2. Cannon with [8] (=8V) -> floor 3, collect 6V, fall to -5
+    3. Cannon with [5, 6] (=11V) -> floor 6, collect 2V, fall to -5
+    4. Cannon with [6] (=6V) -> floor 1, fall to -5
+    5. Cannon with [5, 2] (=7V) -> floor 2, fall to -5
+    6. Cannon with [8, 2] (=10V) -> floor 5, fall to -5
+
+F=6 B=5 S=3
+         ______________
+      6  |            |   cannon 8V + 3V = 11V
+      5  |            |   cannon 3V + 3V + 4V = 10V
+      4  #            #   LOCKED: needs 9V, add 1V or 2V or 3V or 5V or 6V or 9V
+      3  |            |   cannon 8V = 8V
+      2  |            |   cannon 3V + 4V = 7V
+      1  |    [4V]    |   cannon 3V + 3V = 6V
+      0  =    [8V]    =   ground floor (start), stairs down
+     -1  =            =   basement, stairs
+     -2  =            =   basement, stairs
+     -3  =    [3V]    =   basement, stairs
+     -4  =            =   basement, stairs
+     -5  =[3V] CANNON =   basement, stairs
+         ==============
+  Sequence:
+    1. Walk ground + basement (floors -5..0), collect [3, 3, 8]
+    2. Cannon with [3, 3] (=6V) -> floor 1, collect 4V, fall to -5
+    3. Cannon with [3, 4] (=7V) -> floor 2, fall to -5
+    4. Cannon with [8] (=8V) -> floor 3, fall to -5
+    5. Cannon with [3, 3, 4] (=10V) -> floor 5, fall to -5
+    6. Cannon with [8, 3] (=11V) -> floor 6, fall to -5
+
+F=6 B=5 S=4
+         ______________
+      6  |            |   cannon 8V + 3V = 11V
+      5  |            |   cannon 8V + 2V = 10V
+      4  |    [3V]    |   cannon 7V + 2V = 9V
+      3  |            |   cannon 8V = 8V
+      2  |            |   cannon 7V = 7V
+      1  #            #   LOCKED: needs 6V, add 1V or 3V or 4V or 6V
+      0  =    [8V]    =   ground floor (start), stairs down
+     -1  =            =   basement, stairs
+     -2  =            =   basement, stairs
+     -3  =            =   basement, stairs
+     -4  =    [7V]    =   basement, stairs
+     -5  =[2V] CANNON =   basement, stairs
+         ==============
+  Sequence:
+    1. Walk ground + basement (floors -5..0), collect [2, 7, 8]
+    2. Cannon with [7, 2] (=9V) -> floor 4, collect 3V, fall to -5
+    3. Cannon with [7] (=7V) -> floor 2, fall to -5
+    4. Cannon with [8] (=8V) -> floor 3, fall to -5
+    5. Cannon with [8, 2] (=10V) -> floor 5, fall to -5
+    6. Cannon with [8, 3] (=11V) -> floor 6, fall to -5
+
+F=7 B=1 S=2
+         ______________
+      7  |            |   cannon 5V + 3V = 8V
+      6  |    [3V]    |   cannon 2V + 5V = 7V
+      5  #            #   LOCKED: needs 6V, add 1V or 3V or 4V or 6V
+      4  |            |   cannon 5V = 5V
+      3  |            |   cannon 2V + 2V = 4V
+      2  |    [2V]    |   cannon 3V = 3V
+      1  |    [5V]    |   cannon 2V = 2V
+      0  =            =   ground floor (start), stairs down
+     -1  =[2V] CANNON =   basement, stairs
+         ==============
+  Sequence:
+    1. Walk ground + basement (floors -1..0), collect [2]
+    2. Cannon with [2] (=2V) -> floor 1, collect 5V, fall to -1
+    3. Cannon with [2, 5] (=7V) -> floor 6, collect 3V, fall to -1
+    4. Cannon with [3] (=3V) -> floor 2, collect 2V, fall to -1
+    5. Cannon with [2, 2] (=4V) -> floor 3, fall to -1
+    6. Cannon with [5] (=5V) -> floor 4, fall to -1
+    7. Cannon with [5, 3] (=8V) -> floor 7, fall to -1
+
+F=7 B=1 S=3
+         ______________
+      7  |            |   cannon 1V + 2V + 5V = 8V
+      6  |            |   cannon 2V + 5V = 7V
+      5  |            |   cannon 1V + 5V = 6V
+      4  |            |   cannon 5V = 5V
+      3  #            #   LOCKED: needs 4V, add 1V or 2V or 3V or 4V
+      2  |            |   cannon 1V + 2V = 3V
+      1  |    [5V]    |   cannon 2V = 2V
+      0  =    [2V]    =   ground floor (start), stairs down
+     -1  =[1V] CANNON =   basement, stairs
+         ==============
+  Sequence:
+    1. Walk ground + basement (floors -1..0), collect [1, 2]
+    2. Cannon with [2] (=2V) -> floor 1, collect 5V, fall to -1
+    3. Cannon with [1, 2] (=3V) -> floor 2, fall to -1
+    4. Cannon with [5] (=5V) -> floor 4, fall to -1
+    5. Cannon with [1, 5] (=6V) -> floor 5, fall to -1
+    6. Cannon with [2, 5] (=7V) -> floor 6, fall to -1
+    7. Cannon with [1, 2, 5] (=8V) -> floor 7, fall to -1
+
+F=7 B=1 S=4
+         ______________
+      7  |            |   cannon 1V + 2V + 5V = 8V
+      6  |            |   cannon 2V + 5V = 7V
+      5  |            |   cannon 1V + 5V = 6V
+      4  |            |   cannon 5V = 5V
+      3  #            #   LOCKED: needs 4V, add 1V or 2V or 3V or 4V
+      2  |            |   cannon 1V + 2V = 3V
+      1  |    [5V]    |   cannon 2V = 2V
+      0  =    [2V]    =   ground floor (start), stairs down
+     -1  =[1V] CANNON =   basement, stairs
+         ==============
+  Sequence:
+    1. Walk ground + basement (floors -1..0), collect [1, 2]
+    2. Cannon with [2] (=2V) -> floor 1, collect 5V, fall to -1
+    3. Cannon with [1, 2] (=3V) -> floor 2, fall to -1
+    4. Cannon with [5] (=5V) -> floor 4, fall to -1
+    5. Cannon with [1, 5] (=6V) -> floor 5, fall to -1
+    6. Cannon with [2, 5] (=7V) -> floor 6, fall to -1
+    7. Cannon with [1, 2, 5] (=8V) -> floor 7, fall to -1
+
+F=7 B=2 S=2
+         ______________
+      7  |            |   cannon 4V + 5V = 9V
+      6  |            |   cannon 3V + 5V = 8V
+      5  |            |   cannon 3V + 4V = 7V
+      4  #            #   LOCKED: needs 6V, add 1V or 2V or 3V or 6V
+      3  |            |   cannon 5V = 5V
+      2  |            |   cannon 4V = 4V
+      1  |            |   cannon 3V = 3V
+      0  =    [5V]    =   ground floor (start), stairs down
+     -1  =    [4V]    =   basement, stairs
+     -2  =[3V] CANNON =   basement, stairs
+         ==============
+  Sequence:
+    1. Walk ground + basement (floors -2..0), collect [3, 4, 5]
+    2. Cannon with [3] (=3V) -> floor 1, fall to -2
+    3. Cannon with [4] (=4V) -> floor 2, fall to -2
+    4. Cannon with [5] (=5V) -> floor 3, fall to -2
+    5. Cannon with [3, 4] (=7V) -> floor 5, fall to -2
+    6. Cannon with [3, 5] (=8V) -> floor 6, fall to -2
+    7. Cannon with [4, 5] (=9V) -> floor 7, fall to -2
+
+F=7 B=2 S=3
+         ______________
+      7  |            |   cannon 1V + 3V + 5V = 9V
+      6  |            |   cannon 3V + 5V = 8V
+      5  #            #   LOCKED: needs 7V, add 1V or 2V or 3V or 4V or 6V or 7V
+      4  |            |   cannon 1V + 5V = 6V
+      3  |            |   cannon 5V = 5V
+      2  |            |   cannon 1V + 3V = 4V
+      1  |            |   cannon 3V = 3V
+      0  =    [5V]    =   ground floor (start), stairs down
+     -1  =    [3V]    =   basement, stairs
+     -2  =[1V] CANNON =   basement, stairs
+         ==============
+  Sequence:
+    1. Walk ground + basement (floors -2..0), collect [1, 3, 5]
+    2. Cannon with [3] (=3V) -> floor 1, fall to -2
+    3. Cannon with [1, 3] (=4V) -> floor 2, fall to -2
+    4. Cannon with [5] (=5V) -> floor 3, fall to -2
+    5. Cannon with [1, 5] (=6V) -> floor 4, fall to -2
+    6. Cannon with [3, 5] (=8V) -> floor 6, fall to -2
+    7. Cannon with [1, 3, 5] (=9V) -> floor 7, fall to -2
+
+F=7 B=2 S=4
+         ______________
+      7  |            |   cannon 1V + 3V + 5V = 9V
+      6  |            |   cannon 3V + 5V = 8V
+      5  #            #   LOCKED: needs 7V, add 1V or 2V or 3V or 4V or 6V or 7V
+      4  |            |   cannon 1V + 5V = 6V
+      3  |            |   cannon 5V = 5V
+      2  |            |   cannon 1V + 3V = 4V
+      1  |            |   cannon 3V = 3V
+      0  =    [5V]    =   ground floor (start), stairs down
+     -1  =    [3V]    =   basement, stairs
+     -2  =[1V] CANNON =   basement, stairs
+         ==============
+  Sequence:
+    1. Walk ground + basement (floors -2..0), collect [1, 3, 5]
+    2. Cannon with [3] (=3V) -> floor 1, fall to -2
+    3. Cannon with [1, 3] (=4V) -> floor 2, fall to -2
+    4. Cannon with [5] (=5V) -> floor 3, fall to -2
+    5. Cannon with [1, 5] (=6V) -> floor 4, fall to -2
+    6. Cannon with [3, 5] (=8V) -> floor 6, fall to -2
+    7. Cannon with [1, 3, 5] (=9V) -> floor 7, fall to -2
+
+F=7 B=3 S=2
+         ______________
+      7  |            |   cannon 6V + 4V = 10V
+      6  |            |   cannon 4V + 5V = 9V
+      5  #            #   LOCKED: needs 8V, add 2V or 3V or 4V or 7V or 8V
+      4  |    [5V]    |   cannon 6V + 1V = 7V
+      3  |            |   cannon 6V = 6V
+      2  |            |   cannon 5V = 5V
+      1  |            |   cannon 4V = 4V
+      0  =    [4V]    =   ground floor (start), stairs down
+     -1  =            =   basement, stairs
+     -2  =    [1V]    =   basement, stairs
+     -3  =[6V] CANNON =   basement, stairs
+         ==============
+  Sequence:
+    1. Walk ground + basement (floors -3..0), collect [1, 4, 6]
+    2. Cannon with [6, 1] (=7V) -> floor 4, collect 5V, fall to -3
+    3. Cannon with [4] (=4V) -> floor 1, fall to -3
+    4. Cannon with [5] (=5V) -> floor 2, fall to -3
+    5. Cannon with [6] (=6V) -> floor 3, fall to -3
+    6. Cannon with [4, 5] (=9V) -> floor 6, fall to -3
+    7. Cannon with [6, 4] (=10V) -> floor 7, fall to -3
+
+F=7 B=3 S=3
+         ______________
+      7  |            |   cannon 2V + 1V + 7V = 10V
+      6  |            |   cannon 2V + 7V = 9V
+      5  |            |   cannon 1V + 7V = 8V
+      4  |    [7V]    |   cannon 2V + 5V = 7V
+      3  |            |   cannon 5V + 1V = 6V
+      2  |    [1V]    |   cannon 5V = 5V
+      1  #            #   LOCKED: needs 4V, add 1V or 2V or 3V or 4V
+      0  =            =   ground floor (start), stairs down
+     -1  =    [2V]    =   basement, stairs
+     -2  =    [5V]    =   basement, stairs
+     -3  =   CANNON   =   basement, stairs
+         ==============
+  Sequence:
+    1. Walk ground + basement (floors -3..0), collect [2, 5]
+    2. Cannon with [5] (=5V) -> floor 2, collect 1V, fall to -3
+    3. Cannon with [2, 5] (=7V) -> floor 4, collect 7V, fall to -3
+    4. Cannon with [5, 1] (=6V) -> floor 3, fall to -3
+    5. Cannon with [1, 7] (=8V) -> floor 5, fall to -3
+    6. Cannon with [2, 7] (=9V) -> floor 6, fall to -3
+    7. Cannon with [2, 1, 7] (=10V) -> floor 7, fall to -3
+
+F=7 B=3 S=4
+         ______________
+      7  |    [5V]    |   cannon 6V + 4V = 10V
+      6  |            |   cannon 4V + 5V = 9V
+      5  #            #   LOCKED: needs 8V, add 1V or 2V or 3V or 4V or 8V
+      4  |            |   cannon 7V = 7V
+      3  |    [7V]    |   cannon 6V = 6V
+      2  |            |   cannon 5V = 5V
+      1  |            |   cannon 4V = 4V
+      0  =            =   ground floor (start), stairs down
+     -1  =            =   basement, stairs
+     -2  =    [4V]    =   basement, stairs
+     -3  =[6V] CANNON =   basement, stairs
+         ==============
+  Sequence:
+    1. Walk ground + basement (floors -3..0), collect [4, 6]
+    2. Cannon with [6] (=6V) -> floor 3, collect 7V, fall to -3
+    3. Cannon with [6, 4] (=10V) -> floor 7, collect 5V, fall to -3
+    4. Cannon with [4] (=4V) -> floor 1, fall to -3
+    5. Cannon with [5] (=5V) -> floor 2, fall to -3
+    6. Cannon with [7] (=7V) -> floor 4, fall to -3
+    7. Cannon with [4, 5] (=9V) -> floor 6, fall to -3
+
+F=7 B=4 S=2
+         ______________
+      7  |            |   cannon 5V + 6V = 11V
+      6  |            |   cannon 10V = 10V
+      5  |            |   cannon 3V + 6V = 9V
+      4  |            |   cannon 3V + 5V = 8V
+      3  #            #   LOCKED: needs 7V, add 1V or 2V or 4V or 7V
+      2  |            |   cannon 6V = 6V
+      1  |    [6V]    |   cannon 5V = 5V
+      0  =   [10V]    =   ground floor (start), stairs down
+     -1  =            =   basement, stairs
+     -2  =            =   basement, stairs
+     -3  =    [3V]    =   basement, stairs
+     -4  =[5V] CANNON =   basement, stairs
+         ==============
+  Sequence:
+    1. Walk ground + basement (floors -4..0), collect [3, 5, 10]
+    2. Cannon with [5] (=5V) -> floor 1, collect 6V, fall to -4
+    3. Cannon with [6] (=6V) -> floor 2, fall to -4
+    4. Cannon with [3, 5] (=8V) -> floor 4, fall to -4
+    5. Cannon with [3, 6] (=9V) -> floor 5, fall to -4
+    6. Cannon with [10] (=10V) -> floor 6, fall to -4
+    7. Cannon with [5, 6] (=11V) -> floor 7, fall to -4
+
+F=7 B=4 S=3
+         ______________
+      7  |            |   cannon 5V + 3V + 3V = 11V
+      6  |    [3V]    |   cannon 7V + 3V = 10V
+      5  #            #   LOCKED: needs 9V, add 1V or 2V or 3V or 4V or 6V or 9V
+      4  |            |   cannon 5V + 3V = 8V
+      3  |            |   cannon 7V = 7V
+      2  |            |   cannon 3V + 3V = 6V
+      1  |            |   cannon 5V = 5V
+      0  =            =   ground floor (start), stairs down
+     -1  =    [5V]    =   basement, stairs
+     -2  =            =   basement, stairs
+     -3  =    [3V]    =   basement, stairs
+     -4  =[7V] CANNON =   basement, stairs
+         ==============
+  Sequence:
+    1. Walk ground + basement (floors -4..0), collect [3, 5, 7]
+    2. Cannon with [7, 3] (=10V) -> floor 6, collect 3V, fall to -4
+    3. Cannon with [5] (=5V) -> floor 1, fall to -4
+    4. Cannon with [3, 3] (=6V) -> floor 2, fall to -4
+    5. Cannon with [7] (=7V) -> floor 3, fall to -4
+    6. Cannon with [5, 3] (=8V) -> floor 4, fall to -4
+    7. Cannon with [5, 3, 3] (=11V) -> floor 7, fall to -4
+
+F=7 B=4 S=4
+         ______________
+      7  |    [3V]    |   cannon 4V + 7V = 11V
+      6  |            |   cannon 7V + 3V = 10V
+      5  |            |   cannon 2V + 7V = 9V
+      4  #            #   LOCKED: needs 8V, add 1V or 2V or 3V or 4V or 5V or 6V or 8V
+      3  |            |   cannon 7V = 7V
+      2  |    [7V]    |   cannon 4V + 2V = 6V
+      1  |            |   cannon 2V + 3V = 5V
+      0  =            =   ground floor (start), stairs down
+     -1  =            =   basement, stairs
+     -2  =    [2V]    =   basement, stairs
+     -3  =            =   basement, stairs
+     -4  =[4V] CANNON =   basement, stairs
+         ==============
+  Sequence:
+    1. Walk ground + basement (floors -4..0), collect [2, 4]
+    2. Cannon with [4, 2] (=6V) -> floor 2, collect 7V, fall to -4
+    3. Cannon with [4, 7] (=11V) -> floor 7, collect 3V, fall to -4
+    4. Cannon with [2, 3] (=5V) -> floor 1, fall to -4
+    5. Cannon with [7] (=7V) -> floor 3, fall to -4
+    6. Cannon with [2, 7] (=9V) -> floor 5, fall to -4
+    7. Cannon with [7, 3] (=10V) -> floor 6, fall to -4
+
+F=7 B=5 S=2
+         ______________
+      7  |            |   cannon 1V + 11V = 12V
+      6  |            |   cannon 11V = 11V
+      5  |            |   cannon 1V + 9V = 10V
+      4  |            |   cannon 9V = 9V
+      3  |   [11V]    |   cannon 1V + 7V = 8V
+      2  |            |   cannon 7V = 7V
+      1  #            #   LOCKED: needs 6V, add 5V or 6V
+      0  =    [1V]    =   ground floor (start), stairs down
+     -1  =    [9V]    =   basement, stairs
+     -2  =    [7V]    =   basement, stairs
+     -3  =            =   basement, stairs
+     -4  =            =   basement, stairs
+     -5  =   CANNON   =   basement, stairs
+         ==============
+  Sequence:
+    1. Walk ground + basement (floors -5..0), collect [1, 7, 9]
+    2. Cannon with [1, 7] (=8V) -> floor 3, collect 11V, fall to -5
+    3. Cannon with [7] (=7V) -> floor 2, fall to -5
+    4. Cannon with [9] (=9V) -> floor 4, fall to -5
+    5. Cannon with [1, 9] (=10V) -> floor 5, fall to -5
+    6. Cannon with [11] (=11V) -> floor 6, fall to -5
+    7. Cannon with [1, 11] (=12V) -> floor 7, fall to -5
+
+F=7 B=5 S=3
+         ______________
+      7  |    [7V]    |   cannon 2V + 9V + 1V = 12V
+      6  |    [1V]    |   cannon 2V + 9V = 11V
+      5  |            |   cannon 9V + 1V = 10V
+      4  |            |   cannon 9V = 9V
+      3  |            |   cannon 1V + 7V = 8V
+      2  |            |   cannon 7V = 7V
+      1  #            #   LOCKED: needs 6V, add 3V or 4V or 5V or 6V
+      0  =            =   ground floor (start), stairs down
+     -1  =            =   basement, stairs
+     -2  =            =   basement, stairs
+     -3  =    [2V]    =   basement, stairs
+     -4  =    [9V]    =   basement, stairs
+     -5  =   CANNON   =   basement, stairs
+         ==============
+  Sequence:
+    1. Walk ground + basement (floors -5..0), collect [2, 9]
+    2. Cannon with [2, 9] (=11V) -> floor 6, collect 1V, fall to -5
+    3. Cannon with [2, 9, 1] (=12V) -> floor 7, collect 7V, fall to -5
+    4. Cannon with [7] (=7V) -> floor 2, fall to -5
+    5. Cannon with [1, 7] (=8V) -> floor 3, fall to -5
+    6. Cannon with [9] (=9V) -> floor 4, fall to -5
+    7. Cannon with [9, 1] (=10V) -> floor 5, fall to -5
+
+F=7 B=5 S=4
+         ______________
+      7  |    [6V]    |   cannon 10V + 2V = 12V
+      6  |            |   cannon 3V + 2V + 6V = 11V
+      5  |    [2V]    |   cannon 10V = 10V
+      4  |            |   cannon 3V + 6V = 9V
+      3  |            |   cannon 2V + 6V = 8V
+      2  #            #   LOCKED: needs 7V, add 1V or 2V or 4V or 5V or 7V
+      1  |            |   cannon 6V = 6V
+      0  =    [3V]    =   ground floor (start), stairs down
+     -1  =            =   basement, stairs
+     -2  =            =   basement, stairs
+     -3  =            =   basement, stairs
+     -4  =   [10V]    =   basement, stairs
+     -5  =   CANNON   =   basement, stairs
+         ==============
+  Sequence:
+    1. Walk ground + basement (floors -5..0), collect [3, 10]
+    2. Cannon with [10] (=10V) -> floor 5, collect 2V, fall to -5
+    3. Cannon with [10, 2] (=12V) -> floor 7, collect 6V, fall to -5
+    4. Cannon with [6] (=6V) -> floor 1, fall to -5
+    5. Cannon with [2, 6] (=8V) -> floor 3, fall to -5
+    6. Cannon with [3, 6] (=9V) -> floor 4, fall to -5
+    7. Cannon with [3, 2, 6] (=11V) -> floor 6, fall to -5
+
+F=8 B=1 S=2
+         ______________
+      8  |    [4V]    |   cannon 2V + 7V = 9V
+      7  #            #   LOCKED: needs 8V, add 1V or 4V or 5V or 6V or 8V
+      6  |            |   cannon 7V = 7V
+      5  |    [3V]    |   cannon 2V + 4V = 6V
+      4  |            |   cannon 2V + 3V = 5V
+      3  |            |   cannon 4V = 4V
+      2  |            |   cannon 3V = 3V
+      1  |    [7V]    |   cannon 2V = 2V
+      0  =    [2V]    =   ground floor (start), stairs down
+     -1  =   CANNON   =   basement, stairs
+         ==============
+  Sequence:
+    1. Walk ground + basement (floors -1..0), collect [2]
+    2. Cannon with [2] (=2V) -> floor 1, collect 7V, fall to -1
+    3. Cannon with [2, 7] (=9V) -> floor 8, collect 4V, fall to -1
+    4. Cannon with [2, 4] (=6V) -> floor 5, collect 3V, fall to -1
+    5. Cannon with [3] (=3V) -> floor 2, fall to -1
+    6. Cannon with [4] (=4V) -> floor 3, fall to -1
+    7. Cannon with [2, 3] (=5V) -> floor 4, fall to -1
+    8. Cannon with [7] (=7V) -> floor 6, fall to -1
+
+F=8 B=1 S=3
+         ______________
+      8  |            |   cannon 2V + 3V + 4V = 9V
+      7  #            #   LOCKED: needs 8V, add 1V or 2V or 3V or 4V or 5V or 6V or 8V
+      6  |            |   cannon 3V + 4V = 7V
+      5  |            |   cannon 2V + 4V = 6V
+      4  |            |   cannon 2V + 3V = 5V
+      3  |            |   cannon 4V = 4V
+      2  |            |   cannon 3V = 3V
+      1  |    [4V]    |   cannon 2V = 2V
+      0  =    [3V]    =   ground floor (start), stairs down
+     -1  =[2V] CANNON =   basement, stairs
+         ==============
+  Sequence:
+    1. Walk ground + basement (floors -1..0), collect [2, 3]
+    2. Cannon with [2] (=2V) -> floor 1, collect 4V, fall to -1
+    3. Cannon with [3] (=3V) -> floor 2, fall to -1
+    4. Cannon with [4] (=4V) -> floor 3, fall to -1
+    5. Cannon with [2, 3] (=5V) -> floor 4, fall to -1
+    6. Cannon with [2, 4] (=6V) -> floor 5, fall to -1
+    7. Cannon with [3, 4] (=7V) -> floor 6, fall to -1
+    8. Cannon with [2, 3, 4] (=9V) -> floor 8, fall to -1
+
+F=8 B=1 S=4
+         ______________
+      8  |            |   cannon 2V + 3V + 4V = 9V
+      7  #            #   LOCKED: needs 8V, add 1V or 2V or 3V or 4V or 5V or 6V or 8V
+      6  |            |   cannon 3V + 4V = 7V
+      5  |            |   cannon 2V + 4V = 6V
+      4  |            |   cannon 2V + 3V = 5V
+      3  |            |   cannon 4V = 4V
+      2  |            |   cannon 3V = 3V
+      1  |    [4V]    |   cannon 2V = 2V
+      0  =    [3V]    =   ground floor (start), stairs down
+     -1  =[2V] CANNON =   basement, stairs
+         ==============
+  Sequence:
+    1. Walk ground + basement (floors -1..0), collect [2, 3]
+    2. Cannon with [2] (=2V) -> floor 1, collect 4V, fall to -1
+    3. Cannon with [3] (=3V) -> floor 2, fall to -1
+    4. Cannon with [4] (=4V) -> floor 3, fall to -1
+    5. Cannon with [2, 3] (=5V) -> floor 4, fall to -1
+    6. Cannon with [2, 4] (=6V) -> floor 5, fall to -1
+    7. Cannon with [3, 4] (=7V) -> floor 6, fall to -1
+    8. Cannon with [2, 3, 4] (=9V) -> floor 8, fall to -1
+
+F=8 B=2 S=2
+         ______________
+      8  |            |   cannon 6V + 4V = 10V
+      7  |    [4V]    |   cannon 6V + 3V = 9V
+      6  #            #   LOCKED: needs 8V, add 2V or 4V or 5V or 7V or 8V
+      5  |            |   cannon 1V + 6V = 7V
+      4  |            |   cannon 6V = 6V
+      3  |            |   cannon 1V + 4V = 5V
+      2  |            |   cannon 4V = 4V
+      1  |            |   cannon 3V = 3V
+      0  =    [3V]    =   ground floor (start), stairs down
+     -1  =    [6V]    =   basement, stairs
+     -2  =[1V] CANNON =   basement, stairs
+         ==============
+  Sequence:
+    1. Walk ground + basement (floors -2..0), collect [1, 3, 6]
+    2. Cannon with [6, 3] (=9V) -> floor 7, collect 4V, fall to -2
+    3. Cannon with [3] (=3V) -> floor 1, fall to -2
+    4. Cannon with [4] (=4V) -> floor 2, fall to -2
+    5. Cannon with [1, 4] (=5V) -> floor 3, fall to -2
+    6. Cannon with [6] (=6V) -> floor 4, fall to -2
+    7. Cannon with [1, 6] (=7V) -> floor 5, fall to -2
+    8. Cannon with [6, 4] (=10V) -> floor 8, fall to -2
+
+F=8 B=2 S=3
+         ______________
+      8  |            |   cannon 10V = 10V
+      7  |            |   cannon 5V + 4V = 9V
+      6  |            |   cannon 5V + 3V = 8V
+      5  |            |   cannon 3V + 4V = 7V
+      4  #            #   LOCKED: needs 6V, add 1V or 2V or 3V or 6V
+      3  |            |   cannon 5V = 5V
+      2  |            |   cannon 4V = 4V
+      1  |    [4V]    |   cannon 3V = 3V
+      0  =    [3V]    =   ground floor (start), stairs down
+     -1  =   [10V]    =   basement, stairs
+     -2  =[5V] CANNON =   basement, stairs
+         ==============
+  Sequence:
+    1. Walk ground + basement (floors -2..0), collect [3, 5, 10]
+    2. Cannon with [3] (=3V) -> floor 1, collect 4V, fall to -2
+    3. Cannon with [4] (=4V) -> floor 2, fall to -2
+    4. Cannon with [5] (=5V) -> floor 3, fall to -2
+    5. Cannon with [3, 4] (=7V) -> floor 5, fall to -2
+    6. Cannon with [5, 3] (=8V) -> floor 6, fall to -2
+    7. Cannon with [5, 4] (=9V) -> floor 7, fall to -2
+    8. Cannon with [10] (=10V) -> floor 8, fall to -2
+
+F=8 B=2 S=4
+         ______________
+      8  |            |   cannon 5V + 3V + 2V = 10V
+      7  |    [2V]    |   cannon 6V + 3V = 9V
+      6  |            |   cannon 5V + 3V = 8V
+      5  |            |   cannon 5V + 2V = 7V
+      4  |    [3V]    |   cannon 6V = 6V
+      3  |    [6V]    |   cannon 5V = 5V
+      2  #            #   LOCKED: needs 4V, add 1V or 2V or 4V
+      1  |            |   cannon 3V = 3V
+      0  =    [5V]    =   ground floor (start), stairs down
+     -1  =            =   basement, stairs
+     -2  =   CANNON   =   basement, stairs
+         ==============
+  Sequence:
+    1. Walk ground + basement (floors -2..0), collect [5]
+    2. Cannon with [5] (=5V) -> floor 3, collect 6V, fall to -2
+    3. Cannon with [6] (=6V) -> floor 4, collect 3V, fall to -2
+    4. Cannon with [6, 3] (=9V) -> floor 7, collect 2V, fall to -2
+    5. Cannon with [3] (=3V) -> floor 1, fall to -2
+    6. Cannon with [5, 2] (=7V) -> floor 5, fall to -2
+    7. Cannon with [5, 3] (=8V) -> floor 6, fall to -2
+    8. Cannon with [5, 3, 2] (=10V) -> floor 8, fall to -2
+
+F=8 B=3 S=2
+         ______________
+      8  |            |   cannon 4V + 7V = 11V
+      7  #            #   LOCKED: needs 10V, add 3V or 6V or 8V or 9V or 10V
+      6  |            |   cannon 2V + 7V = 9V
+      5  |            |   cannon 7V + 1V = 8V
+      4  |            |   cannon 7V = 7V
+      3  |    [1V]    |   cannon 2V + 4V = 6V
+      2  |            |   cannon 4V + 1V = 5V
+      1  |    [7V]    |   cannon 4V = 4V
+      0  =            =   ground floor (start), stairs down
+     -1  =    [4V]    =   basement, stairs
+     -2  =    [2V]    =   basement, stairs
+     -3  =   CANNON   =   basement, stairs
+         ==============
+  Sequence:
+    1. Walk ground + basement (floors -3..0), collect [2, 4]
+    2. Cannon with [4] (=4V) -> floor 1, collect 7V, fall to -3
+    3. Cannon with [2, 4] (=6V) -> floor 3, collect 1V, fall to -3
+    4. Cannon with [4, 1] (=5V) -> floor 2, fall to -3
+    5. Cannon with [7] (=7V) -> floor 4, fall to -3
+    6. Cannon with [7, 1] (=8V) -> floor 5, fall to -3
+    7. Cannon with [2, 7] (=9V) -> floor 6, fall to -3
+    8. Cannon with [4, 7] (=11V) -> floor 8, fall to -3
+
+F=8 B=3 S=3
+         ______________
+      8  |            |   cannon 6V + 5V = 11V
+      7  |            |   cannon 2V + 3V + 5V = 10V
+      6  |            |   cannon 6V + 3V = 9V
+      5  |    [5V]    |   cannon 2V + 6V = 8V
+      4  |            |   cannon 2V + 5V = 7V
+      3  |            |   cannon 6V = 6V
+      2  |            |   cannon 5V = 5V
+      1  #            #   LOCKED: needs 4V, add 1V or 2V or 4V
+      0  =    [6V]    =   ground floor (start), stairs down
+     -1  =    [3V]    =   basement, stairs
+     -2  =            =   basement, stairs
+     -3  =[2V] CANNON =   basement, stairs
+         ==============
+  Sequence:
+    1. Walk ground + basement (floors -3..0), collect [2, 3, 6]
+    2. Cannon with [2, 6] (=8V) -> floor 5, collect 5V, fall to -3
+    3. Cannon with [5] (=5V) -> floor 2, fall to -3
+    4. Cannon with [6] (=6V) -> floor 3, fall to -3
+    5. Cannon with [2, 5] (=7V) -> floor 4, fall to -3
+    6. Cannon with [6, 3] (=9V) -> floor 6, fall to -3
+    7. Cannon with [2, 3, 5] (=10V) -> floor 7, fall to -3
+    8. Cannon with [6, 5] (=11V) -> floor 8, fall to -3
+
+F=8 B=3 S=4
+         ______________
+      8  |            |   cannon 4V + 6V + 1V = 11V
+      7  |            |   cannon 4V + 6V = 10V
+      6  |            |   cannon 9V = 9V
+      5  #            #   LOCKED: needs 8V, add 1V or 2V or 3V or 4V or 7V or 8V
+      4  |            |   cannon 6V + 1V = 7V
+      3  |            |   cannon 6V = 6V
+      2  |            |   cannon 4V + 1V = 5V
+      1  |    [1V]    |   cannon 4V = 4V
+      0  =    [6V]    =   ground floor (start), stairs down
+     -1  =            =   basement, stairs
+     -2  =    [9V]    =   basement, stairs
+     -3  =[4V] CANNON =   basement, stairs
+         ==============
+  Sequence:
+    1. Walk ground + basement (floors -3..0), collect [4, 6, 9]
+    2. Cannon with [4] (=4V) -> floor 1, collect 1V, fall to -3
+    3. Cannon with [4, 1] (=5V) -> floor 2, fall to -3
+    4. Cannon with [6] (=6V) -> floor 3, fall to -3
+    5. Cannon with [6, 1] (=7V) -> floor 4, fall to -3
+    6. Cannon with [9] (=9V) -> floor 6, fall to -3
+    7. Cannon with [4, 6] (=10V) -> floor 7, fall to -3
+    8. Cannon with [4, 6, 1] (=11V) -> floor 8, fall to -3
+
+F=8 B=4 S=2
+         ______________
+      8  |            |   cannon 8V + 4V = 12V
+      7  |            |   cannon 3V + 8V = 11V
+      6  |            |   cannon 6V + 4V = 10V
+      5  |    [8V]    |   cannon 6V + 3V = 9V
+      4  |    [4V]    |   cannon 8V = 8V
+      3  |            |   cannon 3V + 4V = 7V
+      2  |            |   cannon 6V = 6V
+      1  #            #   LOCKED: needs 5V, add 1V or 2V or 5V
+      0  =            =   ground floor (start), stairs down
+     -1  =    [3V]    =   basement, stairs
+     -2  =    [6V]    =   basement, stairs
+     -3  =            =   basement, stairs
+     -4  =   CANNON   =   basement, stairs
+         ==============
+  Sequence:
+    1. Walk ground + basement (floors -4..0), collect [3, 6]
+    2. Cannon with [6, 3] (=9V) -> floor 5, collect 8V, fall to -4
+    3. Cannon with [8] (=8V) -> floor 4, collect 4V, fall to -4
+    4. Cannon with [6] (=6V) -> floor 2, fall to -4
+    5. Cannon with [3, 4] (=7V) -> floor 3, fall to -4
+    6. Cannon with [6, 4] (=10V) -> floor 6, fall to -4
+    7. Cannon with [3, 8] (=11V) -> floor 7, fall to -4
+    8. Cannon with [8, 4] (=12V) -> floor 8, fall to -4
+
+F=8 B=4 S=3
+         ______________
+      8  |            |   cannon 4V + 8V = 12V
+      7  |            |   cannon 5V + 6V = 11V
+      6  |            |   cannon 4V + 6V = 10V
+      5  |            |   cannon 4V + 5V = 9V
+      4  |            |   cannon 8V = 8V
+      3  #            #   LOCKED: needs 7V, add 1V or 2V or 3V or 7V
+      2  |    [8V]    |   cannon 6V = 6V
+      1  |    [6V]    |   cannon 5V = 5V
+      0  =    [5V]    =   ground floor (start), stairs down
+     -1  =    [4V]    =   basement, stairs
+     -2  =            =   basement, stairs
+     -3  =            =   basement, stairs
+     -4  =   CANNON   =   basement, stairs
+         ==============
+  Sequence:
+    1. Walk ground + basement (floors -4..0), collect [4, 5]
+    2. Cannon with [5] (=5V) -> floor 1, collect 6V, fall to -4
+    3. Cannon with [6] (=6V) -> floor 2, collect 8V, fall to -4
+    4. Cannon with [8] (=8V) -> floor 4, fall to -4
+    5. Cannon with [4, 5] (=9V) -> floor 5, fall to -4
+    6. Cannon with [4, 6] (=10V) -> floor 6, fall to -4
+    7. Cannon with [5, 6] (=11V) -> floor 7, fall to -4
+    8. Cannon with [4, 8] (=12V) -> floor 8, fall to -4
+
+F=8 B=4 S=4
+         ______________
+      8  |            |   cannon 6V + 5V + 1V = 12V
+      7  |            |   cannon 6V + 5V = 11V
+      6  #            #   LOCKED: needs 10V, add 1V or 2V or 3V or 4V or 5V or 9V or 10V
+      5  |            |   cannon 8V + 1V = 9V
+      4  |            |   cannon 8V = 8V
+      3  |            |   cannon 6V + 1V = 7V
+      2  |    [1V]    |   cannon 6V = 6V
+      1  |            |   cannon 5V = 5V
+      0  =            =   ground floor (start), stairs down
+     -1  =    [8V]    =   basement, stairs
+     -2  =            =   basement, stairs
+     -3  =    [6V]    =   basement, stairs
+     -4  =[5V] CANNON =   basement, stairs
+         ==============
+  Sequence:
+    1. Walk ground + basement (floors -4..0), collect [5, 6, 8]
+    2. Cannon with [6] (=6V) -> floor 2, collect 1V, fall to -4
+    3. Cannon with [5] (=5V) -> floor 1, fall to -4
+    4. Cannon with [6, 1] (=7V) -> floor 3, fall to -4
+    5. Cannon with [8] (=8V) -> floor 4, fall to -4
+    6. Cannon with [8, 1] (=9V) -> floor 5, fall to -4
+    7. Cannon with [6, 5] (=11V) -> floor 7, fall to -4
+    8. Cannon with [6, 5, 1] (=12V) -> floor 8, fall to -4
+
+F=8 B=5 S=2
+         ______________
+      8  |            |   cannon 6V + 7V = 13V
+      7  #            #   LOCKED: needs 12V, add 4V or 5V or 6V or 9V or 12V
+      6  |            |   cannon 8V + 3V = 11V
+      5  |            |   cannon 7V + 3V = 10V
+      4  |            |   cannon 6V + 3V = 9V
+      3  |    [3V]    |   cannon 8V = 8V
+      2  |            |   cannon 7V = 7V
+      1  |            |   cannon 6V = 6V
+      0  =            =   ground floor (start), stairs down
+     -1  =            =   basement, stairs
+     -2  =    [6V]    =   basement, stairs
+     -3  =    [7V]    =   basement, stairs
+     -4  =            =   basement, stairs
+     -5  =[8V] CANNON =   basement, stairs
+         ==============
+  Sequence:
+    1. Walk ground + basement (floors -5..0), collect [6, 7, 8]
+    2. Cannon with [8] (=8V) -> floor 3, collect 3V, fall to -5
+    3. Cannon with [6] (=6V) -> floor 1, fall to -5
+    4. Cannon with [7] (=7V) -> floor 2, fall to -5
+    5. Cannon with [6, 3] (=9V) -> floor 4, fall to -5
+    6. Cannon with [7, 3] (=10V) -> floor 5, fall to -5
+    7. Cannon with [8, 3] (=11V) -> floor 6, fall to -5
+    8. Cannon with [6, 7] (=13V) -> floor 8, fall to -5
+
+F=8 B=5 S=3
+         ______________
+      8  |            |   cannon 2V + 6V + 5V = 13V
+      7  #            #   LOCKED: needs 12V, add 1V or 3V or 4V or 5V or 6V or 7V or 9V or 10V or 12V
+      6  |            |   cannon 6V + 5V = 11V
+      5  |            |   cannon 2V + 5V + 3V = 10V
+      4  |            |   cannon 6V + 3V = 9V
+      3  |            |   cannon 2V + 6V = 8V
+      2  |            |   cannon 2V + 5V = 7V
+      1  |            |   cannon 6V = 6V
+      0  =    [6V]    =   ground floor (start), stairs down
+     -1  =            =   basement, stairs
+     -2  =            =   basement, stairs
+     -3  =    [5V]    =   basement, stairs
+     -4  =    [2V]    =   basement, stairs
+     -5  =[3V] CANNON =   basement, stairs
+         ==============
+  Sequence:
+    1. Walk ground + basement (floors -5..0), collect [2, 3, 5, 6]
+    2. Cannon with [6] (=6V) -> floor 1, fall to -5
+    3. Cannon with [2, 5] (=7V) -> floor 2, fall to -5
+    4. Cannon with [2, 6] (=8V) -> floor 3, fall to -5
+    5. Cannon with [6, 3] (=9V) -> floor 4, fall to -5
+    6. Cannon with [2, 5, 3] (=10V) -> floor 5, fall to -5
+    7. Cannon with [6, 5] (=11V) -> floor 6, fall to -5
+    8. Cannon with [2, 6, 5] (=13V) -> floor 8, fall to -5
+
+F=8 B=5 S=4
+         ______________
+      8  |    [5V]    |   cannon 1V + 2V + 10V = 13V
+      7  |            |   cannon 2V + 10V = 12V
+      6  |            |   cannon 1V + 10V = 11V
+      5  |            |   cannon 10V = 10V
+      4  #            #   LOCKED: needs 9V, add 1V or 2V or 3V or 4V or 6V or 7V or 8V or 9V
+      3  |            |   cannon 1V + 2V + 5V = 8V
+      2  |            |   cannon 2V + 5V = 7V
+      1  |            |   cannon 1V + 5V = 6V
+      0  =            =   ground floor (start), stairs down
+     -1  =            =   basement, stairs
+     -2  =   [10V]    =   basement, stairs
+     -3  =    [2V]    =   basement, stairs
+     -4  =    [1V]    =   basement, stairs
+     -5  =   CANNON   =   basement, stairs
+         ==============
+  Sequence:
+    1. Walk ground + basement (floors -5..0), collect [1, 2, 10]
+    2. Cannon with [1, 2, 10] (=13V) -> floor 8, collect 5V, fall to -5
+    3. Cannon with [1, 5] (=6V) -> floor 1, fall to -5
+    4. Cannon with [2, 5] (=7V) -> floor 2, fall to -5
+    5. Cannon with [1, 2, 5] (=8V) -> floor 3, fall to -5
+    6. Cannon with [10] (=10V) -> floor 5, fall to -5
+    7. Cannon with [1, 10] (=11V) -> floor 6, fall to -5
+    8. Cannon with [2, 10] (=12V) -> floor 7, fall to -5
+
+F=9 B=1 S=2
+         ______________
+      9  |    [1V]    |   cannon 4V + 6V = 10V
+      8  #            #   LOCKED: needs 9V, add 3V or 5V or 7V or 8V or 9V
+      7  |            |   cannon 6V + 2V = 8V
+      6  |            |   cannon 6V + 1V = 7V
+      5  |            |   cannon 6V = 6V
+      4  |    [2V]    |   cannon 4V + 1V = 5V
+      3  |    [6V]    |   cannon 4V = 4V
+      2  |            |   cannon 1V + 2V = 3V
+      1  |            |   cannon 2V = 2V
+      0  =            =   ground floor (start), stairs down
+     -1  =[4V] CANNON =   basement, stairs
+         ==============
+  Sequence:
+    1. Walk ground + basement (floors -1..0), collect [4]
+    2. Cannon with [4] (=4V) -> floor 3, collect 6V, fall to -1
+    3. Cannon with [4, 6] (=10V) -> floor 9, collect 1V, fall to -1
+    4. Cannon with [4, 1] (=5V) -> floor 4, collect 2V, fall to -1
+    5. Cannon with [2] (=2V) -> floor 1, fall to -1
+    6. Cannon with [1, 2] (=3V) -> floor 2, fall to -1
+    7. Cannon with [6] (=6V) -> floor 5, fall to -1
+    8. Cannon with [6, 1] (=7V) -> floor 6, fall to -1
+    9. Cannon with [6, 2] (=8V) -> floor 7, fall to -1
+
+F=9 B=1 S=3
+         ______________
+      9  |            |   cannon 4V + 3V + 3V = 10V
+      8  |    [3V]    |   cannon 4V + 5V = 9V
+      7  |    [3V]    |   cannon 5V + 3V = 8V
+      6  |            |   cannon 4V + 3V = 7V
+      5  |            |   cannon 3V + 3V = 6V
+      4  |            |   cannon 5V = 5V
+      3  |    [5V]    |   cannon 4V = 4V
+      2  |            |   cannon 3V = 3V
+      1  #            #   LOCKED: needs 2V, add 2V
+      0  =            =   ground floor (start), stairs down
+     -1  =[4V] CANNON =   basement, stairs
+         ==============
+  Sequence:
+    1. Walk ground + basement (floors -1..0), collect [4]
+    2. Cannon with [4] (=4V) -> floor 3, collect 5V, fall to -1
+    3. Cannon with [4, 5] (=9V) -> floor 8, collect 3V, fall to -1
+    4. Cannon with [5, 3] (=8V) -> floor 7, collect 3V, fall to -1
+    5. Cannon with [3] (=3V) -> floor 2, fall to -1
+    6. Cannon with [5] (=5V) -> floor 4, fall to -1
+    7. Cannon with [3, 3] (=6V) -> floor 5, fall to -1
+    8. Cannon with [4, 3] (=7V) -> floor 6, fall to -1
+    9. Cannon with [4, 3, 3] (=10V) -> floor 9, fall to -1
+
+F=9 B=1 S=4
+         ______________
+      9  |            |   cannon 6V + 4V = 10V
+      8  |            |   cannon 6V + 3V = 9V
+      7  |            |   cannon 4V + 1V + 3V = 8V
+      6  |    [3V]    |   cannon 6V + 1V = 7V
+      5  |    [4V]    |   cannon 6V = 6V
+      4  |            |   cannon 4V + 1V = 5V
+      3  |    [1V]    |   cannon 4V = 4V
+      2  |            |   cannon 3V = 3V
+      1  #            #   LOCKED: needs 2V, add 1V or 2V
+      0  =    [6V]    =   ground floor (start), stairs down
+     -1  =   CANNON   =   basement, stairs
+         ==============
+  Sequence:
+    1. Walk ground + basement (floors -1..0), collect [6]
+    2. Cannon with [6] (=6V) -> floor 5, collect 4V, fall to -1
+    3. Cannon with [4] (=4V) -> floor 3, collect 1V, fall to -1
+    4. Cannon with [6, 1] (=7V) -> floor 6, collect 3V, fall to -1
+    5. Cannon with [3] (=3V) -> floor 2, fall to -1
+    6. Cannon with [4, 1] (=5V) -> floor 4, fall to -1
+    7. Cannon with [4, 1, 3] (=8V) -> floor 7, fall to -1
+    8. Cannon with [6, 3] (=9V) -> floor 8, fall to -1
+    9. Cannon with [6, 4] (=10V) -> floor 9, fall to -1
+
+F=9 B=2 S=2
+         ______________
+      9  |            |   cannon 4V + 7V = 11V
+      8  |    [5V]    |   cannon 3V + 7V = 10V
+      7  |            |   cannon 4V + 5V = 9V
+      6  |            |   cannon 3V + 5V = 8V
+      5  |            |   cannon 7V = 7V
+      4  #            #   LOCKED: needs 6V, add 1V or 2V or 3V or 6V
+      3  |            |   cannon 5V = 5V
+      2  |    [7V]    |   cannon 4V = 4V
+      1  |            |   cannon 3V = 3V
+      0  =    [3V]    =   ground floor (start), stairs down
+     -1  =    [4V]    =   basement, stairs
+     -2  =   CANNON   =   basement, stairs
+         ==============
+  Sequence:
+    1. Walk ground + basement (floors -2..0), collect [3, 4]
+    2. Cannon with [4] (=4V) -> floor 2, collect 7V, fall to -2
+    3. Cannon with [3, 7] (=10V) -> floor 8, collect 5V, fall to -2
+    4. Cannon with [3] (=3V) -> floor 1, fall to -2
+    5. Cannon with [5] (=5V) -> floor 3, fall to -2
+    6. Cannon with [7] (=7V) -> floor 5, fall to -2
+    7. Cannon with [3, 5] (=8V) -> floor 6, fall to -2
+    8. Cannon with [4, 5] (=9V) -> floor 7, fall to -2
+    9. Cannon with [4, 7] (=11V) -> floor 9, fall to -2
+
+F=9 B=2 S=3
+         ______________
+      9  |            |   cannon 5V + 6V = 11V
+      8  |            |   cannon 4V + 6V = 10V
+      7  |            |   cannon 5V + 4V = 9V
+      6  |            |   cannon 2V + 6V = 8V
+      5  |            |   cannon 5V + 2V = 7V
+      4  |            |   cannon 6V = 6V
+      3  |    [4V]    |   cannon 5V = 5V
+      2  |    [6V]    |   cannon 4V = 4V
+      1  #            #   LOCKED: needs 3V, add 1V or 3V
+      0  =            =   ground floor (start), stairs down
+     -1  =    [5V]    =   basement, stairs
+     -2  =[2V] CANNON =   basement, stairs
+         ==============
+  Sequence:
+    1. Walk ground + basement (floors -2..0), collect [2, 5]
+    2. Cannon with [5] (=5V) -> floor 3, collect 4V, fall to -2
+    3. Cannon with [4] (=4V) -> floor 2, collect 6V, fall to -2
+    4. Cannon with [6] (=6V) -> floor 4, fall to -2
+    5. Cannon with [5, 2] (=7V) -> floor 5, fall to -2
+    6. Cannon with [2, 6] (=8V) -> floor 6, fall to -2
+    7. Cannon with [5, 4] (=9V) -> floor 7, fall to -2
+    8. Cannon with [4, 6] (=10V) -> floor 8, fall to -2
+    9. Cannon with [5, 6] (=11V) -> floor 9, fall to -2
+
+F=9 B=2 S=4
+         ______________
+      9  |            |   cannon 7V + 4V = 11V
+      8  |    [5V]    |   cannon 3V + 7V = 10V
+      7  |            |   cannon 5V + 4V = 9V
+      6  |    [4V]    |   cannon 3V + 5V = 8V
+      5  |            |   cannon 7V = 7V
+      4  #            #   LOCKED: needs 6V, add 1V or 2V or 3V or 6V
+      3  |            |   cannon 5V = 5V
+      2  |            |   cannon 4V = 4V
+      1  |    [7V]    |   cannon 3V = 3V
+      0  =            =   ground floor (start), stairs down
+     -1  =    [3V]    =   basement, stairs
+     -2  =   CANNON   =   basement, stairs
+         ==============
+  Sequence:
+    1. Walk ground + basement (floors -2..0), collect [3]
+    2. Cannon with [3] (=3V) -> floor 1, collect 7V, fall to -2
+    3. Cannon with [3, 7] (=10V) -> floor 8, collect 5V, fall to -2
+    4. Cannon with [3, 5] (=8V) -> floor 6, collect 4V, fall to -2
+    5. Cannon with [4] (=4V) -> floor 2, fall to -2
+    6. Cannon with [5] (=5V) -> floor 3, fall to -2
+    7. Cannon with [7] (=7V) -> floor 5, fall to -2
+    8. Cannon with [5, 4] (=9V) -> floor 7, fall to -2
+    9. Cannon with [7, 4] (=11V) -> floor 9, fall to -2
+
+F=9 B=3 S=2
+         ______________
+      9  |            |   cannon 7V + 5V = 12V
+      8  |    [5V]    |   cannon 7V + 4V = 11V
+      7  #            #   LOCKED: needs 10V, add 3V or 5V or 6V or 9V or 10V
+      6  |    [1V]    |   cannon 4V + 5V = 9V
+      5  |            |   cannon 7V + 1V = 8V
+      4  |            |   cannon 7V = 7V
+      3  |            |   cannon 5V + 1V = 6V
+      2  |            |   cannon 5V = 5V
+      1  |            |   cannon 4V = 4V
+      0  =    [4V]    =   ground floor (start), stairs down
+     -1  =            =   basement, stairs
+     -2  =            =   basement, stairs
+     -3  =[7V] CANNON =   basement, stairs
+         ==============
+  Sequence:
+    1. Walk ground + basement (floors -3..0), collect [4, 7]
+    2. Cannon with [7, 4] (=11V) -> floor 8, collect 5V, fall to -3
+    3. Cannon with [4, 5] (=9V) -> floor 6, collect 1V, fall to -3
+    4. Cannon with [4] (=4V) -> floor 1, fall to -3
+    5. Cannon with [5] (=5V) -> floor 2, fall to -3
+    6. Cannon with [5, 1] (=6V) -> floor 3, fall to -3
+    7. Cannon with [7] (=7V) -> floor 4, fall to -3
+    8. Cannon with [7, 1] (=8V) -> floor 5, fall to -3
+    9. Cannon with [7, 5] (=12V) -> floor 9, fall to -3
+
+F=9 B=3 S=3
+         ______________
+      9  |            |   cannon 5V + 7V = 12V
+      8  |            |   cannon 6V + 5V = 11V
+      7  |            |   cannon 6V + 4V = 10V
+      6  |            |   cannon 5V + 4V = 9V
+      5  #            #   LOCKED: needs 8V, add 1V or 2V or 3V or 4V or 8V
+      4  |    [4V]    |   cannon 7V = 7V
+      3  |    [7V]    |   cannon 6V = 6V
+      2  |            |   cannon 5V = 5V
+      1  |            |   cannon 4V = 4V
+      0  =            =   ground floor (start), stairs down
+     -1  =    [6V]    =   basement, stairs
+     -2  =    [5V]    =   basement, stairs
+     -3  =   CANNON   =   basement, stairs
+         ==============
+  Sequence:
+    1. Walk ground + basement (floors -3..0), collect [5, 6]
+    2. Cannon with [6] (=6V) -> floor 3, collect 7V, fall to -3
+    3. Cannon with [7] (=7V) -> floor 4, collect 4V, fall to -3
+    4. Cannon with [4] (=4V) -> floor 1, fall to -3
+    5. Cannon with [5] (=5V) -> floor 2, fall to -3
+    6. Cannon with [5, 4] (=9V) -> floor 6, fall to -3
+    7. Cannon with [6, 4] (=10V) -> floor 7, fall to -3
+    8. Cannon with [6, 5] (=11V) -> floor 8, fall to -3
+    9. Cannon with [5, 7] (=12V) -> floor 9, fall to -3
+
+F=9 B=3 S=4
+         ______________
+      9  |            |   cannon 5V + 7V = 12V
+      8  |            |   cannon 5V + 6V = 11V
+      7  |            |   cannon 4V + 6V = 10V
+      6  |    [6V]    |   cannon 5V + 4V = 9V
+      5  #            #   LOCKED: needs 8V, add 1V or 2V or 3V or 4V or 8V
+      4  |    [4V]    |   cannon 7V = 7V
+      3  |            |   cannon 6V = 6V
+      2  |            |   cannon 5V = 5V
+      1  |            |   cannon 4V = 4V
+      0  =            =   ground floor (start), stairs down
+     -1  =    [5V]    =   basement, stairs
+     -2  =            =   basement, stairs
+     -3  =[7V] CANNON =   basement, stairs
+         ==============
+  Sequence:
+    1. Walk ground + basement (floors -3..0), collect [5, 7]
+    2. Cannon with [7] (=7V) -> floor 4, collect 4V, fall to -3
+    3. Cannon with [5, 4] (=9V) -> floor 6, collect 6V, fall to -3
+    4. Cannon with [4] (=4V) -> floor 1, fall to -3
+    5. Cannon with [5] (=5V) -> floor 2, fall to -3
+    6. Cannon with [6] (=6V) -> floor 3, fall to -3
+    7. Cannon with [4, 6] (=10V) -> floor 7, fall to -3
+    8. Cannon with [5, 6] (=11V) -> floor 8, fall to -3
+    9. Cannon with [5, 7] (=12V) -> floor 9, fall to -3
+
+F=9 B=4 S=2
+         ______________
+      9  |            |   cannon 7V + 6V = 13V
+      8  |            |   cannon 5V + 7V = 12V
+      7  |            |   cannon 5V + 6V = 11V
+      6  #            #   LOCKED: needs 10V, add 3V or 4V or 5V or 8V or 10V
+      5  |            |   cannon 7V + 2V = 9V
+      4  |            |   cannon 6V + 2V = 8V
+      3  |            |   cannon 7V = 7V
+      2  |    [2V]    |   cannon 6V = 6V
+      1  |    [6V]    |   cannon 5V = 5V
+      0  =    [5V]    =   ground floor (start), stairs down
+     -1  =            =   basement, stairs
+     -2  =            =   basement, stairs
+     -3  =            =   basement, stairs
+     -4  =[7V] CANNON =   basement, stairs
+         ==============
+  Sequence:
+    1. Walk ground + basement (floors -4..0), collect [5, 7]
+    2. Cannon with [5] (=5V) -> floor 1, collect 6V, fall to -4
+    3. Cannon with [6] (=6V) -> floor 2, collect 2V, fall to -4
+    4. Cannon with [7] (=7V) -> floor 3, fall to -4
+    5. Cannon with [6, 2] (=8V) -> floor 4, fall to -4
+    6. Cannon with [7, 2] (=9V) -> floor 5, fall to -4
+    7. Cannon with [5, 6] (=11V) -> floor 7, fall to -4
+    8. Cannon with [5, 7] (=12V) -> floor 8, fall to -4
+    9. Cannon with [7, 6] (=13V) -> floor 9, fall to -4
+
+F=9 B=4 S=3
+         ______________
+      9  |            |   cannon 1V + 7V + 5V = 13V
+      8  |            |   cannon 7V + 5V = 12V
+      7  |    [5V]    |   cannon 1V + 10V = 11V
+      6  |            |   cannon 10V = 10V
+      5  #            #   LOCKED: needs 9V, add 1V or 2V or 3V or 4V or 8V or 9V
+      4  |            |   cannon 1V + 7V = 8V
+      3  |            |   cannon 7V = 7V
+      2  |            |   cannon 1V + 5V = 6V
+      1  |            |   cannon 5V = 5V
+      0  =   [10V]    =   ground floor (start), stairs down
+     -1  =            =   basement, stairs
+     -2  =    [7V]    =   basement, stairs
+     -3  =            =   basement, stairs
+     -4  =[1V] CANNON =   basement, stairs
+         ==============
+  Sequence:
+    1. Walk ground + basement (floors -4..0), collect [1, 7, 10]
+    2. Cannon with [1, 10] (=11V) -> floor 7, collect 5V, fall to -4
+    3. Cannon with [5] (=5V) -> floor 1, fall to -4
+    4. Cannon with [1, 5] (=6V) -> floor 2, fall to -4
+    5. Cannon with [7] (=7V) -> floor 3, fall to -4
+    6. Cannon with [1, 7] (=8V) -> floor 4, fall to -4
+    7. Cannon with [10] (=10V) -> floor 6, fall to -4
+    8. Cannon with [7, 5] (=12V) -> floor 8, fall to -4
+    9. Cannon with [1, 7, 5] (=13V) -> floor 9, fall to -4
+
+F=9 B=4 S=4
+         ______________
+      9  |            |   cannon 7V + 1V + 5V = 13V
+      8  |            |   cannon 7V + 5V = 12V
+      7  #            #   LOCKED: needs 11V, add 1V or 2V or 3V or 4V or 5V or 6V or 8V or 9V or 10V or 11V
+      6  |            |   cannon 7V + 2V + 1V = 10V
+      5  |    [5V]    |   cannon 7V + 2V = 9V
+      4  |            |   cannon 7V + 1V = 8V
+      3  |            |   cannon 7V = 7V
+      2  |            |   cannon 1V + 5V = 6V
+      1  |            |   cannon 5V = 5V
+      0  =    [7V]    =   ground floor (start), stairs down
+     -1  =    [2V]    =   basement, stairs
+     -2  =            =   basement, stairs
+     -3  =    [1V]    =   basement, stairs
+     -4  =   CANNON   =   basement, stairs
+         ==============
+  Sequence:
+    1. Walk ground + basement (floors -4..0), collect [1, 2, 7]
+    2. Cannon with [7, 2] (=9V) -> floor 5, collect 5V, fall to -4
+    3. Cannon with [5] (=5V) -> floor 1, fall to -4
+    4. Cannon with [1, 5] (=6V) -> floor 2, fall to -4
+    5. Cannon with [7] (=7V) -> floor 3, fall to -4
+    6. Cannon with [7, 1] (=8V) -> floor 4, fall to -4
+    7. Cannon with [7, 2, 1] (=10V) -> floor 6, fall to -4
+    8. Cannon with [7, 5] (=12V) -> floor 8, fall to -4
+    9. Cannon with [7, 1, 5] (=13V) -> floor 9, fall to -4
+
+F=9 B=5 S=2
+         ______________
+      9  |            |   cannon 6V + 8V = 14V
+      8  |            |   cannon 6V + 7V = 13V
+      7  #            #   LOCKED: needs 12V, add 4V or 5V or 6V or 9V or 12V
+      6  |    [7V]    |   cannon 3V + 8V = 11V
+      5  |            |   cannon 3V + 7V = 10V
+      4  |            |   cannon 6V + 3V = 9V
+      3  |            |   cannon 8V = 8V
+      2  |            |   cannon 7V = 7V
+      1  |            |   cannon 6V = 6V
+      0  =            =   ground floor (start), stairs down
+     -1  =            =   basement, stairs
+     -2  =    [6V]    =   basement, stairs
+     -3  =    [8V]    =   basement, stairs
+     -4  =            =   basement, stairs
+     -5  =[3V] CANNON =   basement, stairs
+         ==============
+  Sequence:
+    1. Walk ground + basement (floors -5..0), collect [3, 6, 8]
+    2. Cannon with [3, 8] (=11V) -> floor 6, collect 7V, fall to -5
+    3. Cannon with [6] (=6V) -> floor 1, fall to -5
+    4. Cannon with [7] (=7V) -> floor 2, fall to -5
+    5. Cannon with [8] (=8V) -> floor 3, fall to -5
+    6. Cannon with [6, 3] (=9V) -> floor 4, fall to -5
+    7. Cannon with [3, 7] (=10V) -> floor 5, fall to -5
+    8. Cannon with [6, 7] (=13V) -> floor 8, fall to -5
+    9. Cannon with [6, 8] (=14V) -> floor 9, fall to -5
+
+F=9 B=5 S=3
+         ______________
+      9  |            |   cannon 4V + 10V = 14V
+      8  |   [10V]    |   cannon 7V + 2V + 4V = 13V
+      7  |            |   cannon 2V + 10V = 12V
+      6  |            |   cannon 7V + 4V = 11V
+      5  |            |   cannon 10V = 10V
+      4  |            |   cannon 7V + 2V = 9V
+      3  #            #   LOCKED: needs 8V, add 1V or 2V or 4V or 6V or 8V
+      2  |    [4V]    |   cannon 7V = 7V
+      1  |            |   cannon 2V + 4V = 6V
+      0  =    [2V]    =   ground floor (start), stairs down
+     -1  =            =   basement, stairs
+     -2  =            =   basement, stairs
+     -3  =    [7V]    =   basement, stairs
+     -4  =            =   basement, stairs
+     -5  =   CANNON   =   basement, stairs
+         ==============
+  Sequence:
+    1. Walk ground + basement (floors -5..0), collect [2, 7]
+    2. Cannon with [7] (=7V) -> floor 2, collect 4V, fall to -5
+    3. Cannon with [7, 2, 4] (=13V) -> floor 8, collect 10V, fall to -5
+    4. Cannon with [2, 4] (=6V) -> floor 1, fall to -5
+    5. Cannon with [7, 2] (=9V) -> floor 4, fall to -5
+    6. Cannon with [10] (=10V) -> floor 5, fall to -5
+    7. Cannon with [7, 4] (=11V) -> floor 6, fall to -5
+    8. Cannon with [2, 10] (=12V) -> floor 7, fall to -5
+    9. Cannon with [4, 10] (=14V) -> floor 9, fall to -5
+
+F=9 B=5 S=4
+         ______________
+      9  |            |   cannon 6V + 4V + 3V + 1V = 14V
+      8  |            |   cannon 6V + 4V + 3V = 13V
+      7  #            #   LOCKED: needs 12V, add 1V or 2V or 3V or 4V or 5V or 6V or 7V or 8V or 9V or 11V or 12V
+      6  |            |   cannon 6V + 4V + 1V = 11V
+      5  |            |   cannon 6V + 4V = 10V
+      4  |            |   cannon 6V + 3V = 9V
+      3  |            |   cannon 4V + 3V + 1V = 8V
+      2  |            |   cannon 6V + 1V = 7V
+      1  |            |   cannon 6V = 6V
+      0  =    [6V]    =   ground floor (start), stairs down
+     -1  =    [4V]    =   basement, stairs
+     -2  =    [3V]    =   basement, stairs
+     -3  =            =   basement, stairs
+     -4  =    [1V]    =   basement, stairs
+     -5  =   CANNON   =   basement, stairs
+         ==============
+  Sequence:
+    1. Walk ground + basement (floors -5..0), collect [1, 3, 4, 6]
+    2. Cannon with [6] (=6V) -> floor 1, fall to -5
+    3. Cannon with [6, 1] (=7V) -> floor 2, fall to -5
+    4. Cannon with [4, 3, 1] (=8V) -> floor 3, fall to -5
+    5. Cannon with [6, 3] (=9V) -> floor 4, fall to -5
+    6. Cannon with [6, 4] (=10V) -> floor 5, fall to -5
+    7. Cannon with [6, 4, 1] (=11V) -> floor 6, fall to -5
+    8. Cannon with [6, 4, 3] (=13V) -> floor 8, fall to -5
+    9. Cannon with [6, 4, 3, 1] (=14V) -> floor 9, fall to -5
+
+F=10 B=1 S=2
+         ______________
+     10  |            |   cannon 4V + 7V = 11V
+      9  |            |   cannon 3V + 7V = 10V
+      8  |            |   cannon 2V + 7V = 9V
+      7  #            #   LOCKED: needs 8V, add 1V or 4V or 5V or 6V or 8V
+      6  |            |   cannon 7V = 7V
+      5  |            |   cannon 4V + 2V = 6V
+      4  |            |   cannon 2V + 3V = 5V
+      3  |    [2V]    |   cannon 4V = 4V
+      2  |    [7V]    |   cannon 3V = 3V
+      1  |    [3V]    |   cannon 2V = 2V
+      0  =    [4V]    =   ground floor (start), stairs down
+     -1  =   CANNON   =   basement, stairs
+         ==============
+  Sequence:
+    1. Walk ground + basement (floors -1..0), collect [4]
+    2. Cannon with [4] (=4V) -> floor 3, collect 2V, fall to -1
+    3. Cannon with [2] (=2V) -> floor 1, collect 3V, fall to -1
+    4. Cannon with [3] (=3V) -> floor 2, collect 7V, fall to -1
+    5. Cannon with [2, 3] (=5V) -> floor 4, fall to -1
+    6. Cannon with [4, 2] (=6V) -> floor 5, fall to -1
+    7. Cannon with [7] (=7V) -> floor 6, fall to -1
+    8. Cannon with [2, 7] (=9V) -> floor 8, fall to -1
+    9. Cannon with [3, 7] (=10V) -> floor 9, fall to -1
+    10. Cannon with [4, 7] (=11V) -> floor 10, fall to -1
+
+F=10 B=1 S=3
+         ______________
+     10  |    [2V]    |   cannon 5V + 6V = 11V
+      9  |            |   cannon 6V + 2V + 2V = 10V
+      8  |            |   cannon 5V + 2V + 2V = 9V
+      7  |            |   cannon 6V + 2V = 8V
+      6  |            |   cannon 5V + 2V = 7V
+      5  |    [2V]    |   cannon 6V = 6V
+      4  |    [6V]    |   cannon 5V = 5V
+      3  |            |   cannon 2V + 2V = 4V
+      2  #            #   LOCKED: needs 3V, add 1V or 3V
+      1  |            |   cannon 2V = 2V
+      0  =    [5V]    =   ground floor (start), stairs down
+     -1  =   CANNON   =   basement, stairs
+         ==============
+  Sequence:
+    1. Walk ground + basement (floors -1..0), collect [5]
+    2. Cannon with [5] (=5V) -> floor 4, collect 6V, fall to -1
+    3. Cannon with [6] (=6V) -> floor 5, collect 2V, fall to -1
+    4. Cannon with [5, 6] (=11V) -> floor 10, collect 2V, fall to -1
+    5. Cannon with [2] (=2V) -> floor 1, fall to -1
+    6. Cannon with [2, 2] (=4V) -> floor 3, fall to -1
+    7. Cannon with [5, 2] (=7V) -> floor 6, fall to -1
+    8. Cannon with [6, 2] (=8V) -> floor 7, fall to -1
+    9. Cannon with [5, 2, 2] (=9V) -> floor 8, fall to -1
+    10. Cannon with [6, 2, 2] (=10V) -> floor 9, fall to -1
+
+F=10 B=1 S=4
+         ______________
+     10  |            |   cannon 5V + 3V + 3V = 11V
+      9  |            |   cannon 4V + 3V + 3V = 10V
+      8  |            |   cannon 4V + 5V = 9V
+      7  |            |   cannon 5V + 3V = 8V
+      6  |    [3V]    |   cannon 4V + 3V = 7V
+      5  |            |   cannon 3V + 3V = 6V
+      4  |    [3V]    |   cannon 5V = 5V
+      3  |    [5V]    |   cannon 4V = 4V
+      2  |            |   cannon 3V = 3V
+      1  #            #   LOCKED: needs 2V, add 2V
+      0  =    [4V]    =   ground floor (start), stairs down
+     -1  =   CANNON   =   basement, stairs
+         ==============
+  Sequence:
+    1. Walk ground + basement (floors -1..0), collect [4]
+    2. Cannon with [4] (=4V) -> floor 3, collect 5V, fall to -1
+    3. Cannon with [5] (=5V) -> floor 4, collect 3V, fall to -1
+    4. Cannon with [4, 3] (=7V) -> floor 6, collect 3V, fall to -1
+    5. Cannon with [3] (=3V) -> floor 2, fall to -1
+    6. Cannon with [3, 3] (=6V) -> floor 5, fall to -1
+    7. Cannon with [5, 3] (=8V) -> floor 7, fall to -1
+    8. Cannon with [4, 5] (=9V) -> floor 8, fall to -1
+    9. Cannon with [4, 3, 3] (=10V) -> floor 9, fall to -1
+    10. Cannon with [5, 3, 3] (=11V) -> floor 10, fall to -1
+
+F=10 B=2 S=2
+         ______________
+     10  |            |   cannon 4V + 8V = 12V
+      9  |            |   cannon 3V + 8V = 11V
+      8  |            |   cannon 2V + 8V = 10V
+      7  #            #   LOCKED: needs 9V, add 1V or 5V or 6V or 7V or 9V
+      6  |            |   cannon 8V = 8V
+      5  |    [8V]    |   cannon 4V + 3V = 7V
+      4  |            |   cannon 4V + 2V = 6V
+      3  |            |   cannon 3V + 2V = 5V
+      2  |    [3V]    |   cannon 4V = 4V
+      1  |    [2V]    |   cannon 3V = 3V
+      0  =            =   ground floor (start), stairs down
+     -1  =    [4V]    =   basement, stairs
+     -2  =   CANNON   =   basement, stairs
+         ==============
+  Sequence:
+    1. Walk ground + basement (floors -2..0), collect [4]
+    2. Cannon with [4] (=4V) -> floor 2, collect 3V, fall to -2
+    3. Cannon with [3] (=3V) -> floor 1, collect 2V, fall to -2
+    4. Cannon with [4, 3] (=7V) -> floor 5, collect 8V, fall to -2
+    5. Cannon with [3, 2] (=5V) -> floor 3, fall to -2
+    6. Cannon with [4, 2] (=6V) -> floor 4, fall to -2
+    7. Cannon with [8] (=8V) -> floor 6, fall to -2
+    8. Cannon with [2, 8] (=10V) -> floor 8, fall to -2
+    9. Cannon with [3, 8] (=11V) -> floor 9, fall to -2
+    10. Cannon with [4, 8] (=12V) -> floor 10, fall to -2
+
+F=10 B=2 S=3
+         ______________
+     10  |            |   cannon 4V + 8V = 12V
+      9  |            |   cannon 3V + 8V = 11V
+      8  |            |   cannon 6V + 4V = 10V
+      7  |    [4V]    |   cannon 3V + 6V = 9V
+      6  |            |   cannon 8V = 8V
+      5  |            |   cannon 3V + 4V = 7V
+      4  |            |   cannon 6V = 6V
+      3  #            #   LOCKED: needs 5V, add 1V or 2V or 5V
+      2  |    [8V]    |   cannon 4V = 4V
+      1  |    [6V]    |   cannon 3V = 3V
+      0  =    [3V]    =   ground floor (start), stairs down
+     -1  =            =   basement, stairs
+     -2  =   CANNON   =   basement, stairs
+         ==============
+  Sequence:
+    1. Walk ground + basement (floors -2..0), collect [3]
+    2. Cannon with [3] (=3V) -> floor 1, collect 6V, fall to -2
+    3. Cannon with [3, 6] (=9V) -> floor 7, collect 4V, fall to -2
+    4. Cannon with [4] (=4V) -> floor 2, collect 8V, fall to -2
+    5. Cannon with [6] (=6V) -> floor 4, fall to -2
+    6. Cannon with [3, 4] (=7V) -> floor 5, fall to -2
+    7. Cannon with [8] (=8V) -> floor 6, fall to -2
+    8. Cannon with [6, 4] (=10V) -> floor 8, fall to -2
+    9. Cannon with [3, 8] (=11V) -> floor 9, fall to -2
+    10. Cannon with [4, 8] (=12V) -> floor 10, fall to -2
+
+F=10 B=2 S=4
+         ______________
+     10  |            |   cannon 5V + 7V = 12V
+      9  |            |   cannon 4V + 7V = 11V
+      8  |            |   cannon 3V + 7V = 10V
+      7  |            |   cannon 4V + 5V = 9V
+      6  |    [7V]    |   cannon 3V + 5V = 8V
+      5  |            |   cannon 7V = 7V
+      4  #            #   LOCKED: needs 6V, add 1V or 2V or 3V or 6V
+      3  |            |   cannon 5V = 5V
+      2  |            |   cannon 4V = 4V
+      1  |    [5V]    |   cannon 3V = 3V
+      0  =    [3V]    =   ground floor (start), stairs down
+     -1  =            =   basement, stairs
+     -2  =[4V] CANNON =   basement, stairs
+         ==============
+  Sequence:
+    1. Walk ground + basement (floors -2..0), collect [3, 4]
+    2. Cannon with [3] (=3V) -> floor 1, collect 5V, fall to -2
+    3. Cannon with [3, 5] (=8V) -> floor 6, collect 7V, fall to -2
+    4. Cannon with [4] (=4V) -> floor 2, fall to -2
+    5. Cannon with [5] (=5V) -> floor 3, fall to -2
+    6. Cannon with [7] (=7V) -> floor 5, fall to -2
+    7. Cannon with [4, 5] (=9V) -> floor 7, fall to -2
+    8. Cannon with [3, 7] (=10V) -> floor 8, fall to -2
+    9. Cannon with [4, 7] (=11V) -> floor 9, fall to -2
+    10. Cannon with [5, 7] (=12V) -> floor 10, fall to -2
+
+F=10 B=3 S=2
+         ______________
+     10  |            |   cannon 7V + 6V = 13V
+      9  |            |   cannon 7V + 5V = 12V
+      8  |            |   cannon 7V + 4V = 11V
+      7  |            |   cannon 4V + 6V = 10V
+      6  |            |   cannon 4V + 5V = 9V
+      5  #            #   LOCKED: needs 8V, add 1V or 2V or 3V or 4V or 8V
+      4  |    [6V]    |   cannon 7V = 7V
+      3  |            |   cannon 6V = 6V
+      2  |            |   cannon 5V = 5V
+      1  |    [5V]    |   cannon 4V = 4V
+      0  =    [7V]    =   ground floor (start), stairs down
+     -1  =    [4V]    =   basement, stairs
+     -2  =            =   basement, stairs
+     -3  =   CANNON   =   basement, stairs
+         ==============
+  Sequence:
+    1. Walk ground + basement (floors -3..0), collect [4, 7]
+    2. Cannon with [4] (=4V) -> floor 1, collect 5V, fall to -3
+    3. Cannon with [7] (=7V) -> floor 4, collect 6V, fall to -3
+    4. Cannon with [5] (=5V) -> floor 2, fall to -3
+    5. Cannon with [6] (=6V) -> floor 3, fall to -3
+    6. Cannon with [4, 5] (=9V) -> floor 6, fall to -3
+    7. Cannon with [4, 6] (=10V) -> floor 7, fall to -3
+    8. Cannon with [7, 4] (=11V) -> floor 8, fall to -3
+    9. Cannon with [7, 5] (=12V) -> floor 9, fall to -3
+    10. Cannon with [7, 6] (=13V) -> floor 10, fall to -3
+
+F=10 B=3 S=3
+         ______________
+     10  |            |   cannon 6V + 7V = 13V
+      9  |            |   cannon 1V + 4V + 7V = 12V
+      8  |            |   cannon 4V + 7V = 11V
+      7  |            |   cannon 6V + 4V = 10V
+      6  #            #   LOCKED: needs 9V, add 1V or 2V or 3V or 4V or 5V or 8V or 9V
+      5  |            |   cannon 1V + 7V = 8V
+      4  |    [4V]    |   cannon 1V + 6V = 7V
+      3  |            |   cannon 6V = 6V
+      2  |            |   cannon 1V + 4V = 5V
+      1  |    [7V]    |   cannon 4V = 4V
+      0  =            =   ground floor (start), stairs down
+     -1  =    [6V]    =   basement, stairs
+     -2  =    [1V]    =   basement, stairs
+     -3  =   CANNON   =   basement, stairs
+         ==============
+  Sequence:
+    1. Walk ground + basement (floors -3..0), collect [1, 6]
+    2. Cannon with [1, 6] (=7V) -> floor 4, collect 4V, fall to -3
+    3. Cannon with [4] (=4V) -> floor 1, collect 7V, fall to -3
+    4. Cannon with [1, 4] (=5V) -> floor 2, fall to -3
+    5. Cannon with [6] (=6V) -> floor 3, fall to -3
+    6. Cannon with [1, 7] (=8V) -> floor 5, fall to -3
+    7. Cannon with [6, 4] (=10V) -> floor 7, fall to -3
+    8. Cannon with [4, 7] (=11V) -> floor 8, fall to -3
+    9. Cannon with [1, 4, 7] (=12V) -> floor 9, fall to -3
+    10. Cannon with [6, 7] (=13V) -> floor 10, fall to -3
+
+F=10 B=3 S=4
+         ______________
+     10  |            |   cannon 9V + 4V = 13V
+      9  |            |   cannon 1V + 4V + 7V = 12V
+      8  |            |   cannon 4V + 7V = 11V
+      7  |    [7V]    |   cannon 1V + 9V = 10V
+      6  |    [4V]    |   cannon 9V = 9V
+      5  |            |   cannon 1V + 7V = 8V
+      4  |            |   cannon 7V = 7V
+      3  #            #   LOCKED: needs 6V, add 1V or 2V or 5V or 6V
+      2  |            |   cannon 1V + 4V = 5V
+      1  |            |   cannon 4V = 4V
+      0  =            =   ground floor (start), stairs down
+     -1  =    [1V]    =   basement, stairs
+     -2  =            =   basement, stairs
+     -3  =[9V] CANNON =   basement, stairs
+         ==============
+  Sequence:
+    1. Walk ground + basement (floors -3..0), collect [1, 9]
+    2. Cannon with [9] (=9V) -> floor 6, collect 4V, fall to -3
+    3. Cannon with [1, 9] (=10V) -> floor 7, collect 7V, fall to -3
+    4. Cannon with [4] (=4V) -> floor 1, fall to -3
+    5. Cannon with [1, 4] (=5V) -> floor 2, fall to -3
+    6. Cannon with [7] (=7V) -> floor 4, fall to -3
+    7. Cannon with [1, 7] (=8V) -> floor 5, fall to -3
+    8. Cannon with [4, 7] (=11V) -> floor 8, fall to -3
+    9. Cannon with [1, 4, 7] (=12V) -> floor 9, fall to -3
+    10. Cannon with [9, 4] (=13V) -> floor 10, fall to -3
+
+F=10 B=4 S=2
+         ______________
+     10  |            |   cannon 8V + 6V = 14V
+      9  |            |   cannon 8V + 5V = 13V
+      8  |            |   cannon 4V + 8V = 12V
+      7  |            |   cannon 6V + 5V = 11V
+      6  |            |   cannon 4V + 6V = 10V
+      5  |            |   cannon 4V + 5V = 9V
+      4  |    [6V]    |   cannon 8V = 8V
+      3  #            #   LOCKED: needs 7V, add 1V or 2V or 3V or 7V
+      2  |    [5V]    |   cannon 6V = 6V
+      1  |            |   cannon 5V = 5V
+      0  =            =   ground floor (start), stairs down
+     -1  =            =   basement, stairs
+     -2  =    [4V]    =   basement, stairs
+     -3  =            =   basement, stairs
+     -4  =[8V] CANNON =   basement, stairs
+         ==============
+  Sequence:
+    1. Walk ground + basement (floors -4..0), collect [4, 8]
+    2. Cannon with [8] (=8V) -> floor 4, collect 6V, fall to -4
+    3. Cannon with [6] (=6V) -> floor 2, collect 5V, fall to -4
+    4. Cannon with [5] (=5V) -> floor 1, fall to -4
+    5. Cannon with [4, 5] (=9V) -> floor 5, fall to -4
+    6. Cannon with [4, 6] (=10V) -> floor 6, fall to -4
+    7. Cannon with [6, 5] (=11V) -> floor 7, fall to -4
+    8. Cannon with [4, 8] (=12V) -> floor 8, fall to -4
+    9. Cannon with [8, 5] (=13V) -> floor 9, fall to -4
+    10. Cannon with [8, 6] (=14V) -> floor 10, fall to -4
+
+F=10 B=4 S=3
+         ______________
+     10  |            |   cannon 4V + 1V + 9V = 14V
+      9  |            |   cannon 4V + 9V = 13V
+      8  |            |   cannon 7V + 4V + 1V = 12V
+      7  |            |   cannon 7V + 4V = 11V
+      6  |            |   cannon 1V + 9V = 10V
+      5  |            |   cannon 9V = 9V
+      4  |            |   cannon 7V + 1V = 8V
+      3  |            |   cannon 7V = 7V
+      2  #            #   LOCKED: needs 6V, add 1V or 2V or 5V or 6V
+      1  |    [9V]    |   cannon 4V + 1V = 5V
+      0  =    [4V]    =   ground floor (start), stairs down
+     -1  =    [7V]    =   basement, stairs
+     -2  =            =   basement, stairs
+     -3  =    [1V]    =   basement, stairs
+     -4  =   CANNON   =   basement, stairs
+         ==============
+  Sequence:
+    1. Walk ground + basement (floors -4..0), collect [1, 4, 7]
+    2. Cannon with [4, 1] (=5V) -> floor 1, collect 9V, fall to -4
+    3. Cannon with [7] (=7V) -> floor 3, fall to -4
+    4. Cannon with [7, 1] (=8V) -> floor 4, fall to -4
+    5. Cannon with [9] (=9V) -> floor 5, fall to -4
+    6. Cannon with [1, 9] (=10V) -> floor 6, fall to -4
+    7. Cannon with [7, 4] (=11V) -> floor 7, fall to -4
+    8. Cannon with [7, 4, 1] (=12V) -> floor 8, fall to -4
+    9. Cannon with [4, 9] (=13V) -> floor 9, fall to -4
+    10. Cannon with [4, 1, 9] (=14V) -> floor 10, fall to -4
+
+F=10 B=4 S=4
+         ______________
+     10  |            |   cannon 3V + 8V + 2V + 1V = 14V
+      9  |            |   cannon 3V + 8V + 2V = 13V
+      8  |            |   cannon 3V + 8V + 1V = 12V
+      7  |            |   cannon 3V + 8V = 11V
+      6  |            |   cannon 8V + 2V = 10V
+      5  |            |   cannon 8V + 1V = 9V
+      4  |    [2V]    |   cannon 8V = 8V
+      3  #            #   LOCKED: needs 7V, add 1V or 2V or 3V or 4V or 5V or 6V or 7V
+      2  |            |   cannon 3V + 2V + 1V = 6V
+      1  |    [1V]    |   cannon 3V + 2V = 5V
+      0  =            =   ground floor (start), stairs down
+     -1  =    [8V]    =   basement, stairs
+     -2  =            =   basement, stairs
+     -3  =    [3V]    =   basement, stairs
+     -4  =   CANNON   =   basement, stairs
+         ==============
+  Sequence:
+    1. Walk ground + basement (floors -4..0), collect [3, 8]
+    2. Cannon with [8] (=8V) -> floor 4, collect 2V, fall to -4
+    3. Cannon with [3, 2] (=5V) -> floor 1, collect 1V, fall to -4
+    4. Cannon with [3, 2, 1] (=6V) -> floor 2, fall to -4
+    5. Cannon with [8, 1] (=9V) -> floor 5, fall to -4
+    6. Cannon with [8, 2] (=10V) -> floor 6, fall to -4
+    7. Cannon with [3, 8] (=11V) -> floor 7, fall to -4
+    8. Cannon with [3, 8, 1] (=12V) -> floor 8, fall to -4
+    9. Cannon with [3, 8, 2] (=13V) -> floor 9, fall to -4
+    10. Cannon with [3, 8, 2, 1] (=14V) -> floor 10, fall to -4
+
+F=10 B=5 S=2
+         ______________
+     10  |            |   cannon 7V + 8V = 15V
+      9  |            |   cannon 6V + 8V = 14V
+      8  |            |   cannon 6V + 7V = 13V
+      7  #            #   LOCKED: needs 12V, add 4V or 5V or 6V or 9V or 12V
+      6  |            |   cannon 3V + 8V = 11V
+      5  |    [8V]    |   cannon 7V + 3V = 10V
+      4  |            |   cannon 6V + 3V = 9V
+      3  |            |   cannon 8V = 8V
+      2  |    [3V]    |   cannon 7V = 7V
+      1  |    [7V]    |   cannon 6V = 6V
+      0  =            =   ground floor (start), stairs down
+     -1  =            =   basement, stairs
+     -2  =            =   basement, stairs
+     -3  =            =   basement, stairs
+     -4  =    [6V]    =   basement, stairs
+     -5  =   CANNON   =   basement, stairs
+         ==============
+  Sequence:
+    1. Walk ground + basement (floors -5..0), collect [6]
+    2. Cannon with [6] (=6V) -> floor 1, collect 7V, fall to -5
+    3. Cannon with [7] (=7V) -> floor 2, collect 3V, fall to -5
+    4. Cannon with [7, 3] (=10V) -> floor 5, collect 8V, fall to -5
+    5. Cannon with [8] (=8V) -> floor 3, fall to -5
+    6. Cannon with [6, 3] (=9V) -> floor 4, fall to -5
+    7. Cannon with [3, 8] (=11V) -> floor 6, fall to -5
+    8. Cannon with [6, 7] (=13V) -> floor 8, fall to -5
+    9. Cannon with [6, 8] (=14V) -> floor 9, fall to -5
+    10. Cannon with [7, 8] (=15V) -> floor 10, fall to -5
+
+F=10 B=5 S=3
+         ______________
+     10  |    [4V]    |   cannon 6V + 2V + 7V = 15V
+      9  #            #   LOCKED: needs 14V, add 1V or 3V or 4V or 5V or 6V or 7V or 8V or 10V or 12V or 14V
+      8  |            |   cannon 6V + 7V = 13V
+      7  |            |   cannon 6V + 2V + 4V = 12V
+      6  |            |   cannon 7V + 4V = 11V
+      5  |            |   cannon 6V + 4V = 10V
+      4  |            |   cannon 2V + 7V = 9V
+      3  |            |   cannon 6V + 2V = 8V
+      2  |            |   cannon 7V = 7V
+      1  |    [7V]    |   cannon 6V = 6V
+      0  =            =   ground floor (start), stairs down
+     -1  =            =   basement, stairs
+     -2  =            =   basement, stairs
+     -3  =    [6V]    =   basement, stairs
+     -4  =            =   basement, stairs
+     -5  =[2V] CANNON =   basement, stairs
+         ==============
+  Sequence:
+    1. Walk ground + basement (floors -5..0), collect [2, 6]
+    2. Cannon with [6] (=6V) -> floor 1, collect 7V, fall to -5
+    3. Cannon with [6, 2, 7] (=15V) -> floor 10, collect 4V, fall to -5
+    4. Cannon with [7] (=7V) -> floor 2, fall to -5
+    5. Cannon with [6, 2] (=8V) -> floor 3, fall to -5
+    6. Cannon with [2, 7] (=9V) -> floor 4, fall to -5
+    7. Cannon with [6, 4] (=10V) -> floor 5, fall to -5
+    8. Cannon with [7, 4] (=11V) -> floor 6, fall to -5
+    9. Cannon with [6, 2, 4] (=12V) -> floor 7, fall to -5
+    10. Cannon with [6, 7] (=13V) -> floor 8, fall to -5
+
+F=10 B=5 S=4
+         ______________
+     10  |            |   cannon 1V + 5V + 7V + 2V = 15V
+      9  |            |   cannon 5V + 7V + 2V = 14V
+      8  |            |   cannon 1V + 5V + 7V = 13V
+      7  |    [2V]    |   cannon 5V + 7V = 12V
+      6  #            #   LOCKED: needs 11V, add 1V or 2V or 3V or 4V or 5V or 6V or 8V or 9V or 10V or 11V
+      5  |            |   cannon 1V + 7V + 2V = 10V
+      4  |            |   cannon 7V + 2V = 9V
+      3  |            |   cannon 1V + 7V = 8V
+      2  |            |   cannon 7V = 7V
+      1  |            |   cannon 1V + 5V = 6V
+      0  =            =   ground floor (start), stairs down
+     -1  =    [5V]    =   basement, stairs
+     -2  =            =   basement, stairs
+     -3  =    [1V]    =   basement, stairs
+     -4  =            =   basement, stairs
+     -5  =[7V] CANNON =   basement, stairs
+         ==============
+  Sequence:
+    1. Walk ground + basement (floors -5..0), collect [1, 5, 7]
+    2. Cannon with [5, 7] (=12V) -> floor 7, collect 2V, fall to -5
+    3. Cannon with [1, 5] (=6V) -> floor 1, fall to -5
+    4. Cannon with [7] (=7V) -> floor 2, fall to -5
+    5. Cannon with [1, 7] (=8V) -> floor 3, fall to -5
+    6. Cannon with [7, 2] (=9V) -> floor 4, fall to -5
+    7. Cannon with [1, 7, 2] (=10V) -> floor 5, fall to -5
+    8. Cannon with [1, 5, 7] (=13V) -> floor 8, fall to -5
+    9. Cannon with [5, 7, 2] (=14V) -> floor 9, fall to -5
+    10. Cannon with [1, 5, 7, 2] (=15V) -> floor 10, fall to -5
+
