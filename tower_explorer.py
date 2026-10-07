@@ -160,7 +160,7 @@ def parse_range(text):
 
 def main():
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    p.add_argument("--F", type=parse_range, default=parse_range("6-8"), help="floor range, e.g. 6-10 (min 5)")
+    p.add_argument("--F", type=parse_range, default=parse_range("6-8"), help="floor range, e.g. 6-10 (min 2)")
     p.add_argument("--B", type=parse_range, default=parse_range("1-2"), help="basement range, e.g. 1-3 (min 1)")
     p.add_argument("--S", type=parse_range, default=parse_range("2-3"), help="slot range, e.g. 2-4 (min 2)")
     p.add_argument("--max-batteries", type=int, default=3, help="max batteries placed in the tower")
@@ -177,8 +177,8 @@ def main():
     p.add_argument("--seed", type=int, default=None)
     args = p.parse_args()
 
-    if args.F.start < 5 or args.B.start < 1 or args.S.start < 2:
-        sys.exit("Constraints: F >= 5, B >= 1, S >= 2")
+    if args.F.start < 2 or args.B.start < 1 or args.S.start < 2:
+        sys.exit("Constraints: F >= 2, B >= 1, S >= 2")
     if args.unreachable is not None:
         args.min_unreachable, args.max_unreachable = args.unreachable.start, args.unreachable.stop - 1
 
