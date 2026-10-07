@@ -167,8 +167,8 @@ def main():
     p.add_argument("--max-volt", type=int, default=None, help="max battery voltage (default F+B)")
     p.add_argument("--min-unreachable", type=int, default=1, help="min number of unreachable floors")
     p.add_argument("--max-unreachable", type=int, default=None, help="max number of unreachable floors")
-    p.add_argument("--unreachable", type=int, default=None, metavar="X",
-                   help="exactly X unreachable floors (overrides min/max)")
+    p.add_argument("--unreachable", type=parse_range, default=None, metavar="X",
+                   help="number of unreachable floors, exact (2) or range (2-3); overrides min/max")
     p.add_argument("--extra", type=int, default=None, metavar="N",
                    help="exactly N batteries from elsewhere are the minimum needed to unlock every floor")
     p.add_argument("--mode", choices=["exhaustive", "random"], default="exhaustive")
@@ -180,7 +180,7 @@ def main():
     if args.F.start < 5 or args.B.start < 1 or args.S.start < 2:
         sys.exit("Constraints: F >= 5, B >= 1, S >= 2")
     if args.unreachable is not None:
-        args.min_unreachable = args.max_unreachable = args.unreachable
+        args.min_unreachable, args.max_unreachable = args.unreachable.start, args.unreachable.stop - 1
 
     rng = random.Random(args.seed)
     for F, B, S in itertools.product(args.F, args.B, args.S):
